@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Katuv::VERSION
   gem.authors       = ["Joe Fredette"]
   gem.email         = ["jfredett@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{A tool for parsing and transforming internal Ruby DSLs}
+  gem.summary       = %q{A tool for parsing and transforming internal Ruby DSLs}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
