@@ -1,5 +1,6 @@
+module Katuv; end
+
 require "katuv/version"
 
-module Katuv
-  # Your code goes here...
-end
+require 'katuv/object_set'
+require 'katuv/node'
