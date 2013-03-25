@@ -9,3 +9,27 @@ RSpec::Core::RakeTask.new do |task|
 end
 
 task :default => :spec
+
+
+task :flog do
+  puts "#### FLOG ####"
+  system 'flog lib/*'
+  puts "##############"
+end
+
+task :flay do
+  puts "#### FLAY ####"
+  system 'flay lib/*'
+  puts "##############"
+end
+
+task :mutant, [:klass] do |_, args|
+  puts "#### MUTANT TESTING ####"
+  system "mutant -I lib -r katuv --rspec-full #{args[:name] || '::Katuv'}"
+  puts "########################"
+end
+
+task :metrics => [:flog, :flay]
+
+
+task :all => [:spec, :mutant, :metrics]
