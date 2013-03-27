@@ -1,4 +1,4 @@
-shared_examples_for 'a namable class' do
+shared_examples_for 'a nameable class' do
   its(:class) { should respond_to :name }
 end
 

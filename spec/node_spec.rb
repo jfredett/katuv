@@ -28,7 +28,7 @@ describe Katuv::Node do
 
   describe 'Example' do
     subject { Example.new }
-    it_should_behave_like 'a namable class'
+    it_should_behave_like 'a nameable class'
     it_should_behave_like 'a class with the naming behavior'
     it_should_behave_like 'a visitable class'
     it_should_behave_like 'a class with the visitable behavior'
@@ -39,7 +39,7 @@ describe Katuv::Node do
   describe 'ExampleTerminal' do
     subject { ExampleTerminal.new }
 
-    it_should_behave_like 'a namable class'
+    it_should_behave_like 'a nameable class'
     it_should_behave_like 'a class with the naming behavior'
     it_should_behave_like 'a visitable class'
     it_should_behave_like 'a class with the visitable behavior'
@@ -52,7 +52,7 @@ describe Katuv::Node do
   describe 'ExampleNonterminal' do
     subject { ExampleNonterminal.new }
 
-    it_should_behave_like 'a namable class'
+    it_should_behave_like 'a nameable class'
     it_should_behave_like 'a class with the naming behavior'
     it_should_behave_like 'a visitable class'
     it_should_behave_like 'a class with the visitable behavior'
