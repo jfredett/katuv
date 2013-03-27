@@ -30,6 +30,8 @@ describe Katuv::Node do
     subject { Example.new }
     it_should_behave_like 'a namable class'
     it_should_behave_like 'a class with the naming behavior'
+    it_should_behave_like 'a visitable class'
+    it_should_behave_like 'a class with the visitable behavior'
 
     its(:method_name) { should == "example" }
   end
@@ -39,6 +41,8 @@ describe Katuv::Node do
 
     it_should_behave_like 'a namable class'
     it_should_behave_like 'a class with the naming behavior'
+    it_should_behave_like 'a visitable class'
+    it_should_behave_like 'a class with the visitable behavior'
 
     its(:method_name) { should == "example_terminal" }
 
@@ -50,6 +54,8 @@ describe Katuv::Node do
 
     it_should_behave_like 'a namable class'
     it_should_behave_like 'a class with the naming behavior'
+    it_should_behave_like 'a visitable class'
+    it_should_behave_like 'a class with the visitable behavior'
 
     its(:method_name) { should == "example_nonterminal" }
   end
