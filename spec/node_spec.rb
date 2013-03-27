@@ -1,76 +1,56 @@
 require 'spec_helper'
 
 describe Katuv::Node do
-  before do
-    class Example
-      include Katuv::Node
-    end
-
+  before :all do
     class ExampleTerminal
       include Katuv::Node
       terminal!
     end
+
+    class ExampleNonterminal
+      include Katuv::Node
+
+      terminal ExampleTerminal
+      nonterminal ExampleNonterminal
+    end
+
+    class Example
+      include Katuv::Node
+      terminal ExampleTerminal
+      nonterminal ExampleNonterminal
+    end
   end
-  after { Object.send(:remove_const, :Example) }
-
-
-  describe '#terminal!' do
-    context 'a terminal node' do
-      subject { ExampleTerminal }
-      it { should be_terminal }
-    end
-
-    context 'making a node terminal' do
-      before { Example.should_not be_terminal }
-
-      it 'is made terminal by calling the #terminal! method' do
-        class Example
-          terminal!
-        end
-      end
-
-      after { Example.should be_terminal }
-    end
-
-
+  after :all do
+    Object.send(:remove_const, :Example)
+    Object.send(:remove_const, :ExampleTerminal)
+    Object.send(:remove_const, :ExampleNonterminal)
   end
 
-  describe 'a simple, single-class example' do
-    context 'class methods' do
-      subject(:katuv_class) { Example }
+  describe 'Example' do
+    subject { Example.new }
+    it_should_behave_like 'a namable class'
+    it_should_behave_like 'a class with the naming behavior'
 
-      describe 'api' do
-        it { should respond_to :nonterminal }
-        it { should respond_to :terminal    }
-        it { should respond_to :multiple    }
-      end
+    its(:method_name) { should == "example" }
+  end
 
-      describe '#_type_to_method_name' do
-        it { should == Example }
-      end
+  describe 'ExampleTerminal' do
+    subject { ExampleTerminal.new }
 
-      describe
-    end
+    it_should_behave_like 'a namable class'
+    it_should_behave_like 'a class with the naming behavior'
 
-    context 'instance methods' do
-      subject(:katuv_class) { Example.new }
+    its(:method_name) { should == "example_terminal" }
 
-      describe 'api' do
-        it { should respond_to :each          }
-        it { should respond_to :children      }
-        it { should respond_to :has_children? }
-        it { should respond_to :terminal?     }
-        it { should respond_to :run           }
-        it { should respond_to :visit         }
-      end
+    it { should be_terminal }
+  end
 
-      its(:method_name) { should == :example }
+  describe 'ExampleNonterminal' do
+    subject { ExampleNonterminal.new }
 
-      it { should_not have_children }
-      describe '#children' do
-        subject { katuv_class.children }
-        it { should be_empty }
-      end
-    end
+    it_should_behave_like 'a namable class'
+    it_should_behave_like 'a class with the naming behavior'
+
+    its(:method_name) { should == "example_nonterminal" }
   end
 end

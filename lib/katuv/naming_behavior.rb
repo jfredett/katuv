@@ -15,7 +15,7 @@ module Katuv
         #drop the leading _
         sub(/^_/, '').
         #downcase everything to get foo_bar
-        downcase.to_sym
+        downcase
     end
 
   end
