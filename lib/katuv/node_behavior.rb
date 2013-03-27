@@ -11,5 +11,17 @@ module Katuv
     def terminal?
       self.class.terminal?
     end
+
+    def each(&block)
+      children.values.each(&block)
+    end
+
+    def children
+      @children ||= {}
+    end
+
+    def has_children?
+      children.any?
+    end
   end
 end

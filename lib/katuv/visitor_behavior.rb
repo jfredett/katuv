@@ -1,29 +1,16 @@
 module Katuv
   module VisitorBehavior
     def visit(visitor)
-      visitor.before_visit!(self)
-      visitor.call(self)
+      visitor.before(self) if visitor.respond_to? :before
 
-      each do |c|
-        c.visit(visitor)
+      if visitor.respond_to? method_name
+        visitor.send(method_name.to_sym, self)
+      else
+        visitor.unknown(self)
       end
 
-      visitor.after_visit!(self)
+      visitor.after(self) if visitor.respond_to? :after
       nil
-    end
-
-    def run
-    end
-
-    def each(&block)
-      children.values.each(&block)
-    end
-
-    def children
-      @children ||= {}
-    end
-    def has_children?
-      children.any?
     end
   end
 end
