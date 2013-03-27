@@ -1,0 +1,5 @@
+- 0.0.1 -> 0.0.2
+	* Brought most of the work under test.
+	* Reorganized and Refactored `Katuv::Node`
+	* Restructured the Vistior code to not automatically recurse. Should
+		re-implement with some kind of non-local exiting functionality.
