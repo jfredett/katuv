@@ -9,6 +9,10 @@ module Katuv
         visitor.unknown(self)
       end
 
+      each do |c|
+        c.visit(visitor)
+      end
+
       visitor.after(self) if visitor.respond_to? :after
       nil
     end

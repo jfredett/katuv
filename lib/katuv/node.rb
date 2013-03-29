@@ -9,5 +9,9 @@ module Katuv
 
       base.send(:extend, DSL)
     end
+
+    def inspect
+      method_name
+    end
   end
 end

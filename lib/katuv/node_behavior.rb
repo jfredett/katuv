@@ -4,7 +4,7 @@ module Katuv
       @parent = opts[:parent]
       @name = name
       @opts = opts
-      instance_eval &block if block_given?
+      run! &block
     end
     attr_reader :parent, :name
 
@@ -14,6 +14,10 @@ module Katuv
 
     def each(&block)
       children.values.each(&block)
+    end
+
+    def run!(&block)
+      instance_eval &block if block_given?
     end
 
     def children
