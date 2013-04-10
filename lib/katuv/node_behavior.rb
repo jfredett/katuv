@@ -16,6 +16,10 @@ module Katuv
       children.values.each(&block)
     end
 
+    def run!
+      #this sucks
+    end
+
     def children
       @children ||= {}
     end
