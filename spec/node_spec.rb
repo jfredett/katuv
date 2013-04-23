@@ -33,6 +33,8 @@ describe Katuv::Node do
     it_should_behave_like 'a visitable class'
     it_should_behave_like 'a class with the visitable behavior'
 
+    it { should be_an Enumerable }
+
     its(:method_name) { should == "example" }
   end
 

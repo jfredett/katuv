@@ -7,6 +7,10 @@ shared_examples_for 'a class with the visitable behavior' do
   let(:visitor) { double('visitor') }
   before { visitor.stub(:unknown) }
 
+  # this by virtue of the fact that it is visitable and defines #each,
+  # VisitorBehavior includes Enumerable for us.
+  it { should be_an Enumerable }
+
   context 'with before hook' do
     before { visitor.stub(:before) }
 

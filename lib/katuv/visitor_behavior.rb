@@ -1,5 +1,9 @@
 module Katuv
   module VisitorBehavior
+    def self.included(base)
+      base.send(:include, Enumerable)
+    end
+
     def visit(visitor)
       visitor.before(self) if visitor.respond_to? :before
 

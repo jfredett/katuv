@@ -2,7 +2,6 @@ module Katuv
   module Node
     def self.included(base)
       base.send(:include, VisitorBehavior)
-      base.send(:include, Enumerable)
 
       base.send(:include, NamingBehavior)
       base.send(:include, NodeBehavior)
