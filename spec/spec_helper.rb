@@ -6,8 +6,10 @@ require 'katuv'
 
 require 'rspec-spies'
 
-require 'coveralls'
-Coveralls.wear!
+unless ENV['NO_COVERAGE']
+  require 'coveralls'
+  Coveralls.wear!
+end
 
 #include helpers
 Dir["./spec/helpers/*.rb"].each { |file| require file }

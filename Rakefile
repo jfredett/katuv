@@ -24,6 +24,8 @@ task :flay do
 end
 
 task :mutant, [:klass] do |_, args|
+  ENV['NO_COVERAGE'] = 'true'
+
   puts "#### MUTANT TESTING ####"
   system "mutant -I lib -r katuv --rspec-full #{args[:name] || '::Katuv'}"
   puts "########################"
