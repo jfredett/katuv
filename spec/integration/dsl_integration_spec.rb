@@ -8,6 +8,7 @@ describe 'a dsl defined directly with katuv classes' do
 
     class Baz
       include Katuv::Node
+
       terminal!
 
       def self.name
@@ -39,23 +40,27 @@ describe 'a dsl defined directly with katuv classes' do
     Object.send(:remove_const, :Foo)
   end
 
-  let :example_dsl_script do
-    foo do
-      bar '1'
-      bar '2'
-      quux 'bingle'
-
+  context 'a correctly written script' do
+    let :example_dsl_script do
       foo do
-        bar '3'
-        bar '4'
+        bar '1'
+        bar '2'
+        quux 'bingle'
 
-        quux 'bangle'
+        foo do
+          bar '3'
+          bar '4'
+
+          quux 'bangle'
+        end
       end
     end
-  end
 
-  it "parses the example script cleanly, raising no errors" do
-    expect { example_dsl_script }.to_not raise_error
+    it "parses the example script cleanly, raising no errors" do
+      expect { example_dsl_script }.to_not raise_error Katuv::DSL::NonterminalInTerminalError
+      expect { example_dsl_script }.to_not raise_error Katuv::DSL::TerminalAlreadySetError
+      expect { example_dsl_script }.to_not raise_error Katuv::DSL::InvalidNodeTypeError
+    end
   end
 
 end

@@ -42,9 +42,9 @@ module Katuv
         type.to_s
       end.split('::').last.downcase
     end
-  end
 
-  class InvalidNodeTypeError < ArgumentError ; end
-  class TerminalAlreadySetError < ArgumentError ; end
-  class NonterminalInTerminalError < ArgumentError ; end
+    class InvalidNodeTypeError < ArgumentError ; end
+    class TerminalAlreadySetError < ArgumentError ; end
+    class NonterminalInTerminalError < ArgumentError ; end
+  end
 end
