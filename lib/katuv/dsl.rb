@@ -1,7 +1,7 @@
 module Katuv
   module DSL
     def nonterminal(type)
-      raise "NonterminalInTerminalError" if terminal?
+      raise NonterminalInTerminalError if terminal?
       define_method(_type_to_method_name(type)) do |name=nil, opts={}, &block|
         if children.has_key?(type) and children[type]
           children[type].run!(&block)
@@ -14,9 +14,9 @@ module Katuv
 
     def terminal(type)
       #should only allow one.
-      raise "InvalidNodeTypeError" unless type.terminal?
+      raise InvalidNodeTypeError unless type.terminal?
       define_method(_type_to_method_name(type)) do |name=nil, opts={}, &block|
-        raise "TerminalAlreadySetError" if children.has_key?(type)
+        raise TerminalAlreadySetError if children.has_key?(type)
         children[type] = type.new(name, opts.merge(parent: self), &block)
       end
     end
@@ -28,7 +28,7 @@ module Katuv
     def multiple(type)
       #should store an entry in #children that is a list of all the instances
       #it sees of this type. eg, `file 'x'; file 'y' #=> children[File] = [File<@name=x>, File<@name=y>]
-      raise "InvalidNodeTypeError" unless type.terminal?
+      raise InvalidNodeTypeError unless type.terminal?
       define_method(_type_to_method_name(type)) do |name, opts={}, &block|
         children[type] ||= ObjectSet.new
         children[type] << type.new(name, opts.merge(parent: self), &block)
@@ -43,4 +43,8 @@ module Katuv
       end.split('::').last.downcase
     end
   end
+
+  class InvalidNodeTypeError < ArgumentError ; end
+  class TerminalAlreadySetError < ArgumentError ; end
+  class NonterminalInTerminalError < ArgumentError ; end
 end
