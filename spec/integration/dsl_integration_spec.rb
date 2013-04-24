@@ -40,8 +40,8 @@ describe 'a dsl defined directly with katuv classes' do
     Object.send(:remove_const, :Foo)
   end
 
-  context 'a correctly written script' do
-    let :example_dsl_script do
+  describe 'a correctly written script' do
+    subject :example_dsl_script do
       foo do
         bar '1'
         bar '2'
@@ -61,6 +61,21 @@ describe 'a dsl defined directly with katuv classes' do
       expect { example_dsl_script }.to_not raise_error Katuv::DSL::TerminalAlreadySetError
       expect { example_dsl_script }.to_not raise_error Katuv::DSL::InvalidNodeTypeError
     end
-  end
 
+    context 'setting a terminal twice' do
+      subject :example_dsl_script do
+        foo do
+          bar '1'
+
+          quux '2'
+          quux 'bingle'
+        end
+      end
+
+      it 'raises a TerminalAlreadySetError' do
+        expect { example_dsl_script }.to raise_error Katuv::DSL::TerminalAlreadySetError
+      end
+    end
+  end
 end
+
