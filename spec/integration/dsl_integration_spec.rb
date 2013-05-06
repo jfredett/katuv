@@ -77,5 +77,9 @@ describe 'a dsl defined directly with katuv classes' do
       end
     end
   end
+
+  context 'using a nonterminal in place of a terminal when defining the dsl' do
+  end
+
 end
 
