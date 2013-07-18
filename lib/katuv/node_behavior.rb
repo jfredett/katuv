@@ -5,6 +5,7 @@ module Katuv
       @name = name
       @opts = opts
       instance_eval &block if block_given?
+      @block = block if terminal?
     end
     attr_reader :parent, :name
 
