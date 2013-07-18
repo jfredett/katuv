@@ -1,2 +1,0 @@
-RVM_STRING="rvm use rbx-head@katuv --create --verbose"
-[ -e './.rvmrc_local' ] && source './.rvmrc_local' || $RVM_STRING
