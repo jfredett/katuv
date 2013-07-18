@@ -4,6 +4,7 @@ describe Katuv::Node do
   before :all do
     class ExampleTerminal
       include Katuv::Node
+
       terminal!
     end
 
@@ -16,6 +17,7 @@ describe Katuv::Node do
 
     class Example
       include Katuv::Node
+
       terminal ExampleTerminal
       nonterminal ExampleNonterminal
     end
