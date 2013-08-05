@@ -4,13 +4,27 @@ module Katuv
       @parent = opts[:parent]
       @name = name
       @opts = opts
-      @block = block if terminal?
-      run! &block
+      @block = block
+      run! &block unless terminal?
     end
     attr_reader :parent, :name
 
     def terminal?
       self.class.terminal?
+    end
+
+    def block
+      # pretend there's no method if we're not a terminal class.
+      raise NoMethodError unless terminal?
+      @block
+    end
+
+    def arity
+      @block.arity
+    end
+
+    def parameters
+      @block.parameters
     end
 
     def each(&block)
