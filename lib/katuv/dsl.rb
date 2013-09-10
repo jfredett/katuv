@@ -28,7 +28,6 @@ module Katuv
     def multiple(type)
       #should store an entry in #children that is a list of all the instances
       #it sees of this type. eg, `file 'x'; file 'y' #=> children[File] = [File<@name=x>, File<@name=y>]
-      raise InvalidNodeTypeError unless type.terminal?
       define_method(_type_to_method_name(type)) do |name, opts={}, &block|
         children[type] ||= ObjectSet.new
         children[type] << type.new(name, opts.merge(parent: self), &block)
