@@ -149,4 +149,31 @@ complicated DSL, can break it down / load it in peices if necessary.
 
        This makes it easier to deal with elements peicemeal in tests.
 
+## Processors
 
+We should be able to define a processor using a nice DSL. When defining a DSL,
+we should automatically define an appropriate `AST::Processor` subclass. Again,
+an example is informative:
+
+
+    # I don't love the positional argument here, but it's hard to know which is
+    # better, DSL name as the name attribute, or name-of-processor as the name
+    # attribute
+    processor :MyDSL, "Name of Processor" do
+      on :Foo do |node|
+        puts "Seen raw Foo #{node.name}"
+        continue_with bar.foo(node)
+      end
+
+      on :Bar do |node|
+        foo = *node
+        puts "Seen in Bar #{foo.name}"
+        # no continue, so it stops here
+      end
+    end
+
+Or something roughly like that. The idea is to provide a couple helpers to make
+defining these suckers easy (including stuff like having the DSL methods
+available to make defining new syntax nodes easy). This will require a bit of
+work to get right. The idea is that this peice of code should walk down the tree
+and emit chunks of the tree to rebuild it (like proteins unzipping DNA into RNA)
