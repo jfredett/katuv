@@ -7,13 +7,11 @@ provides a simple facility to define DSL components and their connections.
 
 The word [katúv](http://en.wiktionary.org/wiki/%D7%A0%D7%9B%D7%AA%D7%91#Hebrew)
 (Hebrew: 'כָּתוּב') means 'written.' I chose the name as it seemed appropriate with
-this tools purpose (parsing and transforming embedded Ruby DSLs) and as it also
-fit with it's parent project, Exegesis, in terms of tone and subject matter. I
-had thought to use `Mikra` -- but decided that would be inappropriate as it is
-used to [refer](http://en.wikipedia.org/wiki/Mikra) to the Jewish Bible,
-commonly known as the Tanakh. I like interesting names, as they give me an
-opportunity to tell people about interesting things, so I hope you found this
-interesting.
+this tools purpose (parsing and transforming embedded Ruby DSLs). I had thought
+to use `Mikra` -- but decided that would be inappropriate as it is used to
+[refer](http://en.wikipedia.org/wiki/Mikra) to the Jewish Bible, commonly known
+as the Tanakh. I like interesting names, as they give me an opportunity to tell
+people about interesting things, so I hope you found this interesting.
 
 ## Installation
 
