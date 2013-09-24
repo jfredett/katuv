@@ -1,0 +1,152 @@
+# Katuv DSL redux
+
+1. whitequark/ast now central
+2. three main parts
+  2.1. katuv/core
+      The core implementation of the katuv dsl-dsl. Generally unseen by users
+  2.2. katuv/dsl
+      The implementation of the DSL, written as raw classes using katuv/core
+  2.3. katuv/processor
+      A Katuv-defined DSL for defining AST::Processors
+
+  `require 'katuv'` pulls in the first two things. The processor must be pulled
+  in manually.
+
+3. Two modes, interpreter or compiler.
+  3.1. Interpreter = dynamically define classes as needed within some namespace
+  3.2. Compiler does interpreter in some namespace, unparses so they can be
+       statically required (good for bootstrapping), and then removes from the
+       namespace (if running in another program) or exits.
+
+## Use:
+
+The easiest way to show how to define a DSL with katuv (in the ideal case) is by
+showing you:
+
+    # starting the definition
+
+    dsl "Some::Namespace::Here" do
+    end
+
+    #or
+
+    dsl :Namespace do
+    end
+
+    ----------------------------------------------------------------------------
+
+    # defining an actual dsl
+
+    dsl :MyDsl do
+      # I don't like the 'allowed_in_root' bit.
+      terminal :Foo, allowed_in_root: false
+
+      nonterminal :Bar, allowed_in_root: false do
+        one :Foo
+      end
+
+      nonterminal :Baz do
+        one :Foo
+        one :Bar
+      end
+
+      nonterminal :Bingle do
+        many :Foo
+      end
+    end
+
+    # using this dsl
+
+    my_dsl do
+
+      baz 'name_attribute' do
+        foo 'name_attribute'
+        bar do #no name attr is fine
+          foo 'more names'
+        end
+      end
+
+      bingle 'naaames' do
+        foo '1'
+        foo '2'
+        foo 'red'
+        foo 'blue'
+      end
+    end
+
+    ----------------------------------------------------------------------------
+
+    # alternative to above:
+
+    dsl :MyDSL do
+      terminal :Foo
+
+      nonterminal :Bar do
+        one :Foo
+      end
+
+      nonterminal :Baz do
+        one :Foo
+        one :Bar
+      end
+
+      nonterminal :Bingle do
+        many :Foo
+      end
+
+      root :my_dsl do
+        maybe_one :Baz
+        maybe_one :Bingle
+      end
+    end
+
+It would be nice to use a ruby-parser or something so I could refer to the
+constants AoT, basically suss out where the constants are and define them before
+evaluating the DSL as normal against the defined comments.
+
+It'd also be good to make these open, like classes. So that you can do:
+
+    dsl :MyDSL do
+      #stuff
+    end
+
+    # later, in another file
+
+    dsl :MyDSL do
+      #more stuff
+    end
+
+Which is nice from a maintenance point of view (don't need one big file for a
+complicated DSL, can break it down / load it in peices if necessary.
+
+## Things to give thought to
+
+1. What can be done to make things easy to test? What helpers are there?
+  1.1. `#parses?` might be nice, something like:
+
+           dsl(:MyDSL).parses do
+             some block
+           end
+
+       The implementation could be quite simple (just assert it doesn't raise a
+       parse error
+
+  1.2. Half-completed DSL elements should return their parse-tree, so that you
+       can add to them dynamically. ie:
+
+           dsl :MyDSL do
+             f = bar 'something'
+             f.foo 'something else'
+           end
+
+       would be equivalent to:
+
+           dsl :MyDSL do
+             bar 'something' do
+               foo 'something else'
+             end
+           end
+
+       This makes it easier to deal with elements peicemeal in tests.
+
+
