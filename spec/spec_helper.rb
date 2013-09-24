@@ -12,3 +12,5 @@ Coveralls.wear! if ENV['COVERALLS']
 Crystalline::Spec.install!
 
 require 'katuv'
+
+include AST::Sexp
