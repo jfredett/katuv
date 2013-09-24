@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'crystalline'
-gem 'rspec', '2.13.0'
+gem 'crystalline', '~> 1.5.1'
 
 # Specify your gem's dependencies in katuv.gemspec
 gemspec
