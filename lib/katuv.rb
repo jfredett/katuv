@@ -4,3 +4,5 @@ module Katuv; end
 require 'katuv/version'
 
 require 'ast'
+
+require 'katuv/dsl'
