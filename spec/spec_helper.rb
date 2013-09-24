@@ -1,32 +1,14 @@
-require 'bundler/setup'
+# encoding: utf-8
+require 'crystalline/spec'
 
-require 'pry'
+# include helpers
+Dir['./spec/helpers/*.rb'].each { |file| require file }
+
+# include shared examples
+Dir['./spec/shared/*_examples.rb'].each { |file| require file }
+
+Coveralls.wear! if ENV['COVERALLS']
+
+Crystalline::Spec.install!
 
 require 'katuv'
-
-require 'rspec-spies'
-
-unless ENV['NO_COVERAGE']
-  require 'coveralls'
-  Coveralls.wear!
-end
-
-#include helpers
-Dir["./spec/helpers/*.rb"].each { |file| require file }
-
-#include shared examples
-Dir["./spec/shared/*_examples.rb"].each { |file| require file }
-
-RSpec.configure do |config|
-  config.before do
-    allow_message_expectations_on_nil
-  end
-
-  config.treat_symbols_as_metadata_keys_with_true_values = true
-end
-
-class RSpec::Mocks::Mock
-  def inspect
-    "double(#{@name.inspect})"
-  end
-end
