@@ -104,6 +104,11 @@ It would be nice to use a ruby-parser or something so I could refer to the
 constants AoT, basically suss out where the constants are and define them before
 evaluating the DSL as normal against the defined comments.
 
+NB. re: above paragraph. Andrew (@aross) made a great point. If I do this, then
+katuv ceases to be ruby (because I'm changing the semantics of the language),
+which means it might be surprising when trying to do various ruby-tricks that
+may/may not rely on the parts of ruby I have to change.
+
 It'd also be good to make these open, like classes. So that you can do:
 
     dsl :MyDSL do
