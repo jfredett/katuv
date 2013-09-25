@@ -18,6 +18,10 @@ module Katuv
       def root
 
       end
+
+      def evaluate!(&block)
+        instance_eval &block
+      end
     end
   end
 end
