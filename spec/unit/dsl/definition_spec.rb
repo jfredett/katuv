@@ -9,6 +9,11 @@ describe Katuv::DSL::Definition do
     it { should respond_to :nonterminal }
     it { should respond_to :root }
     it { should respond_to :evaluate! }
+    it { should respond_to :namespace }
+  end
+
+  describe '#namespace' do
+    its(:namespace) { should == :SomeNamespace }
   end
 
   describe '#evaluate!' do

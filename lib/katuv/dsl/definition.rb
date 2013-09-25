@@ -6,6 +6,7 @@ module Katuv
       def initialize(namespace)
         @namespace = namespace
       end
+      attr_reader :namespace
 
       def terminal
 
