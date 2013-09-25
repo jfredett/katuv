@@ -2,8 +2,20 @@
 
 module Katuv
   module DSL
-    module Definition
-      def self.define(namespace)
+    class Definition
+      def initialize(namespace)
+        @namespace = namespace
+      end
+
+      def terminal
+
+      end
+
+      def nonterminal
+
+      end
+
+      def root
 
       end
     end

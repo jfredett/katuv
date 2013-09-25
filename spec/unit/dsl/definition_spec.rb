@@ -2,7 +2,13 @@
 require 'spec_helper'
 
 describe Katuv::DSL::Definition do
-  describe 'api' do
-    it { should respond_to :define }
+  describe '#define' do
+    subject { Katuv::DSL::Definition.new(:SomeNamespace) }
+
+    describe 'api of the returned object' do
+      it { should respond_to :terminal }
+      it { should respond_to :nonterminal }
+      it { should respond_to :root }
+    end
   end
 end
