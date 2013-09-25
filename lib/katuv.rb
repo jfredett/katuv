@@ -7,6 +7,7 @@ require 'ast'
 require 'katuv/dsl'
 
 module Katuv
-  def self.dsl(*)
+  def self.dsl(namespace)
+    DSL::Definition.define(namespace)
   end
 end
