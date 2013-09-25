@@ -8,6 +8,6 @@ require 'katuv/dsl'
 
 module Katuv
   def self.dsl(namespace)
-    DSL::Definition.define(namespace)
+    DSL.define(namespace)
   end
 end
