@@ -8,8 +8,8 @@ module Katuv
       end
       attr_reader :namespace
 
-      def terminal
-
+      def terminal(name)
+        Terminal.new(name)
       end
 
       def nonterminal

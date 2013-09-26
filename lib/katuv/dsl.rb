@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'katuv/dsl/definition'
+require 'katuv/dsl/terminal'
 
 module Katuv
   module DSL

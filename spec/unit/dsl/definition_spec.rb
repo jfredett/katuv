@@ -28,4 +28,15 @@ describe Katuv::DSL::Definition do
 
     specify { expect { definition.evaluate! }.to raise_error ArgumentError, "must supply block" }
   end
+
+  describe '#terminal' do
+    subject { definition.terminal(:foo) }
+
+    specify { expect { definition.terminal }.to raise_error ArgumentError, "method 'terminal': given 0, expected 1" }
+
+    it { should respond_to :many }
+    it { should respond_to :one }
+    it { should respond_to :maybe_one }
+    it { should respond_to :maybe_many }
+  end
 end
