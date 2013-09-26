@@ -3,11 +3,12 @@ require 'spec_helper'
 
 describe Katuv::DSL::Root do
   describe 'api' do
-    it { should respond_to :many       }
-    it { should respond_to :one        }
-    it { should respond_to :maybe_many }
-    it { should respond_to :maybe_one  }
-    it { should respond_to :name       }
+    it { should respond_to :many          }
+    it { should respond_to :one           }
+    it { should respond_to :maybe_many    }
+    it { should respond_to :maybe_one     }
+    it { should respond_to :name          }
+    it { should respond_to :relationships }
   end
 
   subject(:terminal) { Katuv::DSL::Root.new(:SomeName) }

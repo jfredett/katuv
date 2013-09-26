@@ -7,7 +7,7 @@ module Katuv
         @name = name
         @relationships = []
       end
-      attr_reader :name
+      attr_reader :name, :relationships
 
       def many
       end
