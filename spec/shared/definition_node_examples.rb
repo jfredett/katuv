@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 shared_examples_for 'a definition node called' do |name|
   let(:block) { proc { shibboleth } }
   let(:klass) { raise "You need to set klass in the shared block" }
