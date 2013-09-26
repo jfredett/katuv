@@ -49,4 +49,26 @@ describe Katuv::DSL::Definition do
       definition.terminal(:SomeName)
     end
   end
+
+  describe '#nonterminal' do
+    subject(:nonterminal) { definition.terminal(:foo) }
+
+    specify { expect { definition.nonterminal }.to raise_error ArgumentError, "method 'nonterminal': given 0, expected 1" }
+
+    it { should respond_to :many }
+    it { should respond_to :one }
+    it { should respond_to :maybe_one }
+    it { should respond_to :maybe_many }
+
+    # these are integration-y
+    it 'calls the block on the created nonterminal instance' do
+      Katuv::DSL::Nonterminal.any_instance.should_receive(:shibboleth)
+      definition.nonterminal(:SomeName, &block)
+    end
+
+    it 'just returns the instance if no block is given' do
+      Katuv::DSL::Nonterminal.any_instance.should_not_receive(:shibboleth)
+      definition.nonterminal(:SomeName)
+    end
+  end
 end

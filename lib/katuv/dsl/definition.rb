@@ -14,8 +14,10 @@ module Katuv
         end
       end
 
-      def nonterminal
-
+      def nonterminal(name, &block)
+        Nonterminal.new(name).tap do |term|
+          term.instance_eval &block if block_given?
+        end
       end
 
       def root

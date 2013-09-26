@@ -2,6 +2,7 @@
 
 require 'katuv/dsl/definition'
 require 'katuv/dsl/terminal'
+require 'katuv/dsl/nonterminal'
 
 module Katuv
   module DSL
