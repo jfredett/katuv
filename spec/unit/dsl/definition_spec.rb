@@ -17,14 +17,14 @@ describe Katuv::DSL::Definition do
   end
 
   describe '#evaluate!' do
-    let(:block) { proc { this_gets_called_on_the_instance } }
+    let(:block) { proc { shibboleth } }
 
     before do
-      definition.stub(:this_gets_called_on_the_instance)
+      definition.stub(:shibboleth)
       definition.evaluate!(&block)
     end
 
-    it { should have_received :this_gets_called_on_the_instance }
+    it { should have_received :shibboleth }
 
     specify { expect { definition.evaluate! }.to raise_error ArgumentError, "must supply block" }
   end
