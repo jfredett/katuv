@@ -71,4 +71,26 @@ describe Katuv::DSL::Definition do
       definition.nonterminal(:SomeName)
     end
   end
+
+  describe '#root' do
+    subject(:root) { definition.terminal(:foo) }
+
+    specify { expect { definition.root }.to raise_error ArgumentError, "method 'root': given 0, expected 1" }
+
+    it { should respond_to :many }
+    it { should respond_to :one }
+    it { should respond_to :maybe_one }
+    it { should respond_to :maybe_many }
+
+    # these are integration-y
+    it 'calls the block on the created root instance' do
+      Katuv::DSL::Root.any_instance.should_receive(:shibboleth)
+      definition.root(:SomeName, &block)
+    end
+
+    it 'just returns the instance if no block is given' do
+      Katuv::DSL::Root.any_instance.should_not_receive(:shibboleth)
+      definition.root(:SomeName)
+    end
+  end
 end
