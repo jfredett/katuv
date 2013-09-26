@@ -13,15 +13,15 @@ describe Katuv::DSL do
   end
 
   describe 'Katuv::DSL.define' do
-    let(:definition_block) { proc { } }
+    let(:definition_block) { proc { shibboleth } }
 
     it 'creates a Katuv::DSL::Definition and #evaluate! the given block on it' do
-      Katuv::DSL::Definition.any_instance.should_receive(:evaluate!).with(&definition_block)
+      Katuv::DSL::Definition.any_instance.should_receive(:shibboleth)
       Katuv::DSL.define(:SomeDSLNamespace, &definition_block).should be_a Katuv::DSL::Definition
     end
 
     it 'creates a Katuv::DSL::Definition' do
-      Katuv::DSL::Definition.any_instance.should_not_receive(:evaluate!).with(:definition_block)
+      Katuv::DSL::Definition.any_instance.should_not_receive(:shibboleth)
       Katuv::DSL.define(:SomeDSLNamespace).should be_a Katuv::DSL::Definition
     end
   end

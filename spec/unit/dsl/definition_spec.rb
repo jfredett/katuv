@@ -25,5 +25,7 @@ describe Katuv::DSL::Definition do
     end
 
     it { should have_received :this_gets_called_on_the_instance }
+
+    specify { expect { definition.evaluate! }.to raise_error ArgumentError, "must supply block" }
   end
 end

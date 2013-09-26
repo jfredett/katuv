@@ -21,6 +21,7 @@ module Katuv
       end
 
       def evaluate!(&block)
+        raise ArgumentError, "must supply block" unless block_given?
         instance_eval &block
       end
     end
