@@ -29,68 +29,20 @@ describe Katuv::DSL::Definition do
   end
 
   describe '#terminal' do
-    subject(:terminal) { definition.terminal(:foo) }
-
-    specify { expect { definition.terminal }.to raise_error ArgumentError, "method 'terminal': given 0, expected 1" }
-
-    it { should respond_to :many }
-    it { should respond_to :one }
-    it { should respond_to :maybe_one }
-    it { should respond_to :maybe_many }
-
-    # these are integration-y
-    it 'calls the block on the created terminal instance' do
-      Katuv::DSL::Terminal.any_instance.should_receive(:shibboleth)
-      definition.terminal(:SomeName, &block)
-    end
-
-    it 'just returns the instance if no block is given' do
-      Katuv::DSL::Terminal.any_instance.should_not_receive(:shibboleth)
-      definition.terminal(:SomeName)
+    it_should_behave_like 'a definition node called', :terminal do
+      let(:klass) { Katuv::DSL::Terminal }
     end
   end
 
   describe '#nonterminal' do
-    subject(:nonterminal) { definition.terminal(:foo) }
-
-    specify { expect { definition.nonterminal }.to raise_error ArgumentError, "method 'nonterminal': given 0, expected 1" }
-
-    it { should respond_to :many }
-    it { should respond_to :one }
-    it { should respond_to :maybe_one }
-    it { should respond_to :maybe_many }
-
-    # these are integration-y
-    it 'calls the block on the created nonterminal instance' do
-      Katuv::DSL::Nonterminal.any_instance.should_receive(:shibboleth)
-      definition.nonterminal(:SomeName, &block)
-    end
-
-    it 'just returns the instance if no block is given' do
-      Katuv::DSL::Nonterminal.any_instance.should_not_receive(:shibboleth)
-      definition.nonterminal(:SomeName)
+    it_should_behave_like 'a definition node called', :nonterminal do
+      let(:klass) { Katuv::DSL::Nonterminal }
     end
   end
 
   describe '#root' do
-    subject(:root) { definition.terminal(:foo) }
-
-    specify { expect { definition.root }.to raise_error ArgumentError, "method 'root': given 0, expected 1" }
-
-    it { should respond_to :many }
-    it { should respond_to :one }
-    it { should respond_to :maybe_one }
-    it { should respond_to :maybe_many }
-
-    # these are integration-y
-    it 'calls the block on the created root instance' do
-      Katuv::DSL::Root.any_instance.should_receive(:shibboleth)
-      definition.root(:SomeName, &block)
-    end
-
-    it 'just returns the instance if no block is given' do
-      Katuv::DSL::Root.any_instance.should_not_receive(:shibboleth)
-      definition.root(:SomeName)
+    it_should_behave_like 'a definition node called', :root do
+      let(:klass) { Katuv::DSL::Root }
     end
   end
 end
