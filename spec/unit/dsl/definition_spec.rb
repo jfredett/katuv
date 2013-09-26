@@ -2,6 +2,7 @@
 require 'spec_helper'
 
 describe Katuv::DSL::Definition do
+  let(:block) { proc { shibboleth } }
   subject(:definition) { Katuv::DSL::Definition.new(:SomeNamespace) }
 
   describe 'api of the returned object' do
@@ -17,8 +18,6 @@ describe Katuv::DSL::Definition do
   end
 
   describe '#evaluate!' do
-    let(:block) { proc { shibboleth } }
-
     before do
       definition.stub(:shibboleth)
       definition.evaluate!(&block)
@@ -30,7 +29,7 @@ describe Katuv::DSL::Definition do
   end
 
   describe '#terminal' do
-    subject { definition.terminal(:foo) }
+    subject(:terminal) { definition.terminal(:foo) }
 
     specify { expect { definition.terminal }.to raise_error ArgumentError, "method 'terminal': given 0, expected 1" }
 
@@ -38,5 +37,16 @@ describe Katuv::DSL::Definition do
     it { should respond_to :one }
     it { should respond_to :maybe_one }
     it { should respond_to :maybe_many }
+
+    # these are integration-y
+    it 'calls the block on the created terminal instance' do
+      Katuv::DSL::Terminal.any_instance.should_receive(:shibboleth)
+      definition.terminal(:SomeName, &block)
+    end
+
+    it 'just returns the instance if no block is given' do
+      Katuv::DSL::Terminal.any_instance.should_not_receive(:shibboleth)
+      definition.terminal(:SomeName)
+    end
   end
 end

@@ -8,8 +8,10 @@ module Katuv
       end
       attr_reader :namespace
 
-      def terminal(name)
-        Terminal.new(name)
+      def terminal(name, &block)
+        Terminal.new(name).tap do |term|
+          term.instance_eval &block if block_given?
+        end
       end
 
       def nonterminal
