@@ -4,32 +4,37 @@ module Katuv
   module DSL
     class Relationship
       def self.many(name)
-        new(name, :many, false)
+        Relationship.new(name, :many)
       end
 
       def self.maybe_many(name)
-        new(name, :many, true)
+        OptionalRelationship.new(name, :many)
       end
 
       def self.one(name)
-        new(name, :single, false)
+        Relationship.new(name, :single)
       end
 
       def self.maybe_one(name)
-        new(name, :single, true)
+        OptionalRelationship.new(name, :single)
       end
 
-      def initialize(name, type, optional)
+      def initialize(name, type)
         @name = name
         @type = type
-        @optional = optional
       end
       protected :initialize
 
       attr_reader :name, :type
 
       def optional?
-        @optional
+        false
+      end
+    end
+
+    class OptionalRelationship < Relationship
+      def optional?
+        true
       end
     end
   end

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Katuv::DSL::Relationship do
   describe 'api' do
-    subject { Katuv::DSL::Relationship.new(nil, nil, nil) }
+    subject { Katuv::DSL::Relationship.new(nil, nil) }
 
     context 'class' do
       its(:class) { should respond_to :many       }
@@ -16,6 +16,7 @@ describe Katuv::DSL::Relationship do
       it { should respond_to :type }
       it { should respond_to :name }
       it { should respond_to :optional? }
+      its(:optional?) { should be false }
     end
   end
 
@@ -50,4 +51,9 @@ describe Katuv::DSL::Relationship do
     its(:name) { should == :RelationshipName }
     it { should be_optional }
   end
+end
+
+describe Katuv::DSL::OptionalRelationship do
+  subject { Katuv::DSL::OptionalRelationship.new(nil, nil) }
+  its(:optional?) { should be true }
 end
