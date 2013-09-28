@@ -6,7 +6,7 @@ shared_examples_for 'a definition node called' do |name|
 
   subject { definition.send(name, :namespace) }
 
-  specify { expect { definition.send(name) }.to raise_error ArgumentError, "method '#{name}': given 0, expected 1" }
+  specify { expect { definition.send(name) }.to raise_error ArgumentError }
   describe 'expected api' do
     it { should respond_to :many }
     it { should respond_to :one }

@@ -4,7 +4,7 @@ shared_examples_for 'a relatable node called' do |name|
   let(:klass) { raise "You must do `let(:klass)` in the 'a relatable node' shared examples" }
 
   specify "requires the argument" do
-    expect { Katuv::DSL::Nonterminal.new }.to raise_error ArgumentError, "method 'initialize': given 0, expected 1"
+    expect { Katuv::DSL::Nonterminal.new }.to raise_error ArgumentError
   end
 
   describe 'api' do
