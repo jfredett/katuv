@@ -2,6 +2,7 @@
 
 require 'katuv/dsl/definition'
 require 'katuv/dsl/definition_node'
+require 'katuv/dsl/relationship'
 require 'katuv/dsl/terminal'
 require 'katuv/dsl/nonterminal'
 require 'katuv/dsl/root'
