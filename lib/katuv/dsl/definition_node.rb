@@ -9,16 +9,20 @@ module Katuv
       end
       attr_reader :name, :relationships
 
-      def many
+      def many(name)
+        relationships << Relationship.many(name)
       end
 
-      def one
+      def maybe_many(name)
+        relationships << Relationship.maybe_many(name)
       end
 
-      def maybe_many
+      def one(name)
+        relationships << Relationship.one(name)
       end
 
-      def maybe_one
+      def maybe_one(name)
+        relationships << Relationship.maybe_one(name)
       end
     end
   end
