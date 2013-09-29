@@ -5,30 +5,34 @@ module Katuv
     class Definition
       def initialize(namespace)
         @namespace = namespace
+        @nodes = []
       end
-      attr_reader :namespace
+      attr_reader :namespace, :nodes
 
       def terminal(name, &block)
-        Terminal.new(name).tap do |term|
-          term.instance_eval &block if block_given?
-        end
+        create_node(Terminal, name, &block)
       end
 
       def nonterminal(name, &block)
-        Nonterminal.new(name).tap do |term|
-          term.instance_eval &block if block_given?
-        end
+        create_node(Nonterminal, name, &block)
       end
 
       def root(name, &block)
-        Root.new(name).tap do |term|
-          term.instance_eval &block if block_given?
-        end
+        create_node(Root, name, &block)
       end
 
       def evaluate!(&block)
         raise ArgumentError, 'must supply block' unless block_given?
         instance_eval &block
+      end
+
+      private
+
+      def create_node(type, name, &block)
+        type.new(name).tap do |term|
+          term.instance_eval &block if block_given?
+          nodes << term
+        end
       end
     end
   end

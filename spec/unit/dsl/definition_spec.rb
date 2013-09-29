@@ -10,6 +10,7 @@ describe Katuv::DSL::Definition do
     it { should respond_to :nonterminal }
     it { should respond_to :root }
     it { should respond_to :evaluate! }
+    it { should respond_to :nodes }
     it { should respond_to :namespace }
   end
 
