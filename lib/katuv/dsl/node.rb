@@ -2,7 +2,7 @@
 
 module Katuv
   module DSL
-    module DefinitionNode
+    module Node
       def initialize(name)
         @name = name
         @relationships = []

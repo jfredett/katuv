@@ -3,7 +3,7 @@
 module Katuv
   module DSL
     class Nonterminal
-      include DefinitionNode
+      include Node
     end
   end
 end

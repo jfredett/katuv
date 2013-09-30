@@ -3,7 +3,7 @@
 module Katuv
   module DSL
     class Terminal
-      include DefinitionNode
+      include Node
     end
   end
 end

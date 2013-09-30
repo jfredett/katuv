@@ -31,19 +31,19 @@ describe Katuv::DSL::Definition do
   end
 
   describe '#terminal' do
-    it_should_behave_like 'a definition node called', :terminal do
+    it_should_behave_like 'a node called', :terminal do
       let(:klass) { Katuv::DSL::Terminal }
     end
   end
 
   describe '#nonterminal' do
-    it_should_behave_like 'a definition node called', :nonterminal do
+    it_should_behave_like 'a node called', :nonterminal do
       let(:klass) { Katuv::DSL::Nonterminal }
     end
   end
 
   describe '#root' do
-    it_should_behave_like 'a definition node called', :root do
+    it_should_behave_like 'a node called', :root do
       let(:klass) { Katuv::DSL::Root }
     end
   end
