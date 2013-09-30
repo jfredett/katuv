@@ -9,6 +9,10 @@ module Katuv
       end
       attr_reader :namespace, :nodes
 
+      def type
+        :definition
+      end
+
       def terminal(name, &block)
         create_node(Terminal, name, &block)
       end
