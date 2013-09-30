@@ -14,5 +14,8 @@ module Katuv
         defn.evaluate!(&block) if block_given?
       end
     end
+
+    def self.parse!(definition)
+    end
   end
 end

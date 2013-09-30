@@ -2,10 +2,6 @@
 require 'spec_helper'
 
 describe Katuv::DSL do
-  describe "Katuv::DSL api" do
-    specify { Katuv::DSL.should respond_to :define }
-  end
-
   specify "Katuv.dsl delegates to Katuv::DSL::define" do
     Katuv::DSL.stub(:define)
     Katuv.dsl :SomeDSLNamespace
