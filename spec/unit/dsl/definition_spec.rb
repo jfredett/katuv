@@ -15,10 +15,9 @@ describe Katuv::DSL::Definition do
     it { should respond_to :type }
   end
 
-  describe '#namespace' do
-    its(:namespace) { should == :SomeNamespace }
-  end
   its(:type) { should == :definition }
+  its(:namespace) { should == :SomeNamespace }
+
 
   describe '#evaluate!' do
     before do
