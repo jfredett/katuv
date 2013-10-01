@@ -24,6 +24,12 @@ module Katuv
       def maybe_one(name)
         relationships << Relationship.maybe_one(name)
       end
+
+      def ast
+        s(type,
+          s(:name, name),
+          s(:associations, *relationships.ast))
+      end
     end
   end
 end

@@ -27,6 +27,13 @@ module Katuv
 
       attr_reader :name, :type
 
+      def ast
+        s(:association,
+          s(:name, name),
+          s(:type, type),
+          s(:optional?, optional?))
+      end
+
       def optional?
         false
       end

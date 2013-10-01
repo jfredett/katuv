@@ -19,6 +19,7 @@ module Katuv
     end
 
     def self.parse!(definition)
+      s(:dsl, *definition.ast)
     end
   end
 end

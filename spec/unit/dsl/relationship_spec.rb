@@ -16,40 +16,69 @@ describe Katuv::DSL::Relationship do
       it { should respond_to :type }
       it { should respond_to :name }
       it { should respond_to :optional? }
+      it { should respond_to :ast }
       its(:optional?) { should be false }
     end
   end
 
   describe 'many relationship' do
-    subject { Katuv::DSL::Relationship.many(:RelationshipName) }
+    subject(:relation) { Katuv::DSL::Relationship.many(:RelationshipName) }
 
     its(:type) { should == :many }
     its(:name) { should == :RelationshipName }
     it { should_not be_optional }
+
+    specify do
+      relation.ast.should == s(:association,
+                               s(:name, :RelationshipName),
+                               s(:type, :many),
+                               s(:optional?, false))
+    end
   end
 
   describe 'maybe many relationship' do
-    subject { Katuv::DSL::Relationship.maybe_many(:RelationshipName) }
+    subject(:relation) { Katuv::DSL::Relationship.maybe_many(:RelationshipName) }
 
     its(:type) { should == :many }
     its(:name) { should == :RelationshipName }
     it { should be_optional }
+
+    specify do
+      relation.ast.should == s(:association,
+                               s(:name, :RelationshipName),
+                               s(:type, :many),
+                               s(:optional?, true))
+    end
   end
 
   describe 'one relationship' do
-    subject { Katuv::DSL::Relationship.one(:RelationshipName) }
+    subject(:relation) { Katuv::DSL::Relationship.one(:RelationshipName) }
 
     its(:type) { should == :single }
     its(:name) { should == :RelationshipName }
     it { should_not be_optional }
+
+    specify do
+      relation.ast.should == s(:association,
+                               s(:name, :RelationshipName),
+                               s(:type, :single),
+                               s(:optional?, false))
+    end
   end
 
   describe 'maybe one relationship' do
-    subject { Katuv::DSL::Relationship.maybe_one(:RelationshipName) }
+    subject(:relation) { Katuv::DSL::Relationship.maybe_one(:RelationshipName) }
 
     its(:type) { should == :single }
     its(:name) { should == :RelationshipName }
     it { should be_optional }
+
+    specify do
+      relation.ast.should == s(:association,
+                               s(:name, :RelationshipName),
+                               s(:type, :single),
+                               s(:optional?, true))
+    end
   end
 end
 

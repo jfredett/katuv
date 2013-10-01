@@ -12,6 +12,7 @@ shared_examples_for 'a node called' do |name|
 
     describe 'api' do
       it { should respond_to :type }
+      it { should respond_to :ast }
     end
 
     it { should have(1).nodes }
@@ -27,6 +28,12 @@ shared_examples_for 'a node called' do |name|
 
     specify "requires a block" do
       expect { definition.send(name) }.to raise_error ArgumentError
+    end
+
+    specify "ast is built as expected" do
+      node.ast.should == s(node.type,
+                           s(:name, node.name),
+                           s(:associations, *node.relationships.ast))
     end
 
     describe 'expected api' do

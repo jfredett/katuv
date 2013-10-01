@@ -18,6 +18,12 @@ shared_examples_for 'a relatable node called' do |name|
 
   subject(:relatable_node) { klass.new(:SomeName) }
 
+  specify "generates the AST as expected" do
+    relatable_node.ast.should == \
+      s(relatable_node.type,
+        s(:name, :SomeName),
+        relatable_node.relationships.ast)
+  end
   its(:name) { should == :SomeName }
 
   describe '#many' do

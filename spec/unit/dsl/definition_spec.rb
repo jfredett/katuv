@@ -14,6 +14,7 @@ describe Katuv::DSL::Definition do
     it { should respond_to :namespace   }
     it { should respond_to :type        }
     it { should respond_to :nodes       }
+    it { should respond_to :ast         }
   end
 
   its(:type) { should == :definition }
@@ -32,6 +33,13 @@ describe Katuv::DSL::Definition do
       definition.root(:root1)
       definition.terminal(:term)
     end.to_not raise_error
+  end
+
+  it "creates an ast as expected" do
+    definition.ast.should == [
+      s(:namespace, :SomeNamespace),
+      s(:nodes, *definition.nodes.ast)
+    ]
   end
 
   describe '#evaluate!' do

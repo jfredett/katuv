@@ -16,6 +16,10 @@ module Katuv
         super
       end
 
+      def ast
+        s(:nodes, *map(&:ast))
+      end
+
       private
 
       def added_root!

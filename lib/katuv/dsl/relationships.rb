@@ -6,6 +6,10 @@ module Katuv
       def initialize
         super([])
       end
+
+      def ast
+        s(:associations, *map(&:ast))
+      end
     end
   end
 end

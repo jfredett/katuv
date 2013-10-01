@@ -30,6 +30,11 @@ module Katuv
         instance_eval &block
       end
 
+      def ast
+        [s(:namespace, namespace),
+         s(:nodes, *nodes.ast)]
+      end
+
       private
 
       def create_node(type, name, &block)
