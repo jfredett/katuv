@@ -35,6 +35,23 @@ describe Katuv::DSL::Definition do
     end.to_not raise_error
   end
 
+  describe '#nodes' do
+    before do
+      definition.terminal(:term1)
+      definition.terminal(:term2)
+      definition.root(:root)
+    end
+
+    subject { definition }
+
+    it { should have(3).nodes }
+
+    it 'has the nodes which were added to the definition' do
+      definition.nodes.map(&:name) =~ [:term1, :term2, :root ]
+    end
+  end
+
+
   it "creates an ast as expected" do
     definition.ast.should == [
       s(:namespace, :SomeNamespace),
