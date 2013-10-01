@@ -5,11 +5,14 @@ shared_examples_for 'a node called' do |name|
   let(:klass) { raise "You need to set klass in the shared block" }
   let(:node) { definition.send(name, :namespace) }
 
-
   describe 'the definition' do
     subject { definition }
 
     before { node } # force the node into existence
+
+    describe 'api' do
+      it { should respond_to :type }
+    end
 
     it { should have(1).nodes }
     describe 'the node' do

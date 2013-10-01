@@ -4,6 +4,10 @@ module Katuv
   module DSL
     class Nonterminal
       include Node
+
+      def type
+        :nonterminal
+      end
     end
   end
 end
