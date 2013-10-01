@@ -28,7 +28,7 @@ module Katuv
       def ast
         s(type,
           s(:name, name),
-          s(:associations, *relationships.ast))
+          relationships.ast)
       end
     end
   end
