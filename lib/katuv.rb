@@ -8,7 +8,8 @@ require 'delegate'
 require 'katuv/dsl'
 
 module Katuv
-  def self.dsl(namespace)
-    DSL.define(namespace)
+  def self.dsl(namespace, &block)
+    raise Katuv::DSL::NoDefinitionBlock unless block_given?
+    DSL.define(namespace, &block)
   end
 end

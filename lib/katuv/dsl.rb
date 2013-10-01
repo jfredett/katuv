@@ -9,6 +9,7 @@ require 'katuv/dsl/terminal'
 require 'katuv/dsl/nonterminal'
 require 'katuv/dsl/root'
 require 'katuv/dsl/multiple_roots_error'
+require 'katuv/dsl/no_definition_block'
 
 module Katuv
   module DSL
