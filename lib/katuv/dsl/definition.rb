@@ -5,7 +5,7 @@ module Katuv
     class Definition
       def initialize(namespace)
         @namespace = namespace
-        @nodes = []
+        @nodes = Nodes.new
       end
       attr_reader :namespace, :nodes
 

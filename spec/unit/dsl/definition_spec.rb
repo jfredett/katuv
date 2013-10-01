@@ -6,13 +6,14 @@ describe Katuv::DSL::Definition do
   subject(:definition) { Katuv::DSL::Definition.new(:SomeNamespace) }
 
   describe 'api of the returned object' do
-    it { should respond_to :terminal }
+    it { should respond_to :terminal    }
     it { should respond_to :nonterminal }
-    it { should respond_to :root }
-    it { should respond_to :evaluate! }
-    it { should respond_to :nodes }
-    it { should respond_to :namespace }
-    it { should respond_to :type }
+    it { should respond_to :root        }
+    it { should respond_to :evaluate!   }
+    it { should respond_to :nodes       }
+    it { should respond_to :namespace   }
+    it { should respond_to :type        }
+    it { should respond_to :nodes       }
   end
 
   its(:type) { should == :definition }

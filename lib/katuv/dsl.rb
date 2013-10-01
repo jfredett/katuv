@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'katuv/dsl/definition'
+require 'katuv/dsl/nodes'
 require 'katuv/dsl/node'
 require 'katuv/dsl/relationship'
 require 'katuv/dsl/terminal'

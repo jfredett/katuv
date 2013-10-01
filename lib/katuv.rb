@@ -3,6 +3,7 @@
 require 'katuv/version'
 
 require 'ast'
+require 'delegate'
 
 require 'katuv/dsl'
 
