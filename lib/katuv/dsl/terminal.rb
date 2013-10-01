@@ -8,6 +8,10 @@ module Katuv
       def type
         :terminal
       end
+
+      def ast
+        s(type, s(:name, name))
+      end
     end
   end
 end

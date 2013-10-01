@@ -30,12 +30,6 @@ shared_examples_for 'a node called' do |name|
       expect { definition.send(name) }.to raise_error ArgumentError
     end
 
-    specify "ast is built as expected" do
-      node.ast.should == s(node.type,
-                           s(:name, node.name),
-                           s(:associations, *node.relationships.ast))
-    end
-
     describe 'expected api' do
       it { should respond_to :many }
       it { should respond_to :one }
