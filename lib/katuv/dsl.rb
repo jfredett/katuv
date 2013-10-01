@@ -8,6 +8,7 @@ require 'katuv/dsl/relationship'
 require 'katuv/dsl/terminal'
 require 'katuv/dsl/nonterminal'
 require 'katuv/dsl/root'
+require 'katuv/dsl/multiple_roots_error'
 
 module Katuv
   module DSL

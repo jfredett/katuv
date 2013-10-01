@@ -20,6 +20,20 @@ describe Katuv::DSL::Definition do
   its(:namespace) { should == :SomeNamespace }
 
 
+  it "raises an error when trying to define the root node more than once"  do
+    expect do
+      definition.root(:root1)
+      definition.root(:root2)
+    end.to raise_error Katuv::DSL::MultipleRootsError
+  end
+
+  it "raises no error when trying to define more nodes after the root node has been defined"  do
+    expect do
+      definition.root(:root1)
+      definition.terminal(:term)
+    end.to_not raise_error
+  end
+
   describe '#evaluate!' do
     before do
       definition.stub(:shibboleth)
