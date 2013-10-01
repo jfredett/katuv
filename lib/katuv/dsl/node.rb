@@ -5,7 +5,7 @@ module Katuv
     module Node
       def initialize(name)
         @name = name
-        @relationships = []
+        @relationships = Relationships.new
       end
       attr_reader :name, :relationships
 

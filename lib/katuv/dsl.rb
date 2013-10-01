@@ -3,6 +3,7 @@
 require 'katuv/dsl/definition'
 require 'katuv/dsl/nodes'
 require 'katuv/dsl/node'
+require 'katuv/dsl/relationships'
 require 'katuv/dsl/relationship'
 require 'katuv/dsl/terminal'
 require 'katuv/dsl/nonterminal'
