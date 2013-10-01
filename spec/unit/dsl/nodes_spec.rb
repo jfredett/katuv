@@ -10,6 +10,30 @@ describe Katuv::DSL::Nodes do
     it { should respond_to :each }
   end
 
+  describe '#<<' do
+    let(:example_node) { double :node }
+
+    before do
+      nodes << example_node
+    end
+
+    it { should include example_node }
+    it { should have(1).element }
+  end
+
+  describe '#each' do
+    let(:example_node) { double :node }
+
+    before { nodes << example_node }
+
+    it "delegates as expected" do
+      example_node.should_receive(:foo)
+      nodes.each do |node|
+        node.foo
+      end
+    end
+  end
+
   describe '#ast' do
     context 'root node ast' do
       before do
