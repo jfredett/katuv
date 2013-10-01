@@ -40,10 +40,19 @@ describe Katuv::DSL::Nodes do
         nodes << Katuv::DSL::Root.new(:root)
       end
 
-      subject(:nodes_ast) { nodes.ast }
-      let(:expected_ast) { s(:nodes, *nodes.map { |n| n.ast }) }
+      describe 'the ast' do
+        subject(:nodes_ast) { nodes.ast }
+        let(:expected_ast) { s(:nodes, *nodes.map(&:ast)) }
 
-      it { should == expected_ast }
+        it { should == expected_ast }
+      end
+
+      describe 'the node' do
+        subject { nodes.last }
+
+        its(:name) { should == :root }
+        its(:type) { should == :root }
+      end
     end
 
     context 'nonterminal node ast' do
@@ -51,10 +60,19 @@ describe Katuv::DSL::Nodes do
         nodes << Katuv::DSL::Nonterminal.new(:nonterm)
       end
 
-      subject(:nodes_ast) { nodes.ast }
-      let(:expected_ast) { s(:nodes, *nodes.map { |n| n.ast }) }
+      describe 'the ast' do
+        subject(:nodes_ast) { nodes.ast }
+        let(:expected_ast) { s(:nodes, *nodes.map(&:ast)) }
 
-      it { should == expected_ast }
+        it { should == expected_ast }
+      end
+
+      describe 'the node' do
+        subject { nodes.last }
+
+        its(:name) { should == :nonterm }
+        its(:type) { should == :nonterminal }
+      end
     end
 
     context 'terminal node ast' do
@@ -62,10 +80,19 @@ describe Katuv::DSL::Nodes do
         nodes << Katuv::DSL::Terminal.new(:term)
       end
 
-      subject(:nodes_ast) { nodes.ast }
-      let(:expected_ast) { s(:nodes, *nodes.map { |n| n.ast }) }
+      describe 'the ast' do
+        subject(:nodes_ast) { nodes.ast }
+        let(:expected_ast) { s(:nodes, *nodes.map(&:ast)) }
 
-      it { should == expected_ast }
+        it { should == expected_ast }
+      end
+
+      describe 'the node' do
+        subject { nodes.last }
+
+        its(:name) { should == :term }
+        its(:type) { should == :terminal }
+      end
     end
 
     context 'mixed nodeset ast' do
@@ -76,10 +103,16 @@ describe Katuv::DSL::Nodes do
         nodes << Katuv::DSL::Root.new(:root)
       end
 
-      subject(:nodes_ast) { nodes.ast }
-      let(:expected_ast) { s(:nodes, *nodes.map { |n| n.ast }) }
+      describe 'the ast' do
+        subject(:nodes_ast) { nodes.ast }
+        let(:expected_ast) { s(:nodes, *nodes.map(&:ast)) }
 
-      it { should == expected_ast }
+        it { should == expected_ast }
+      end
+
+      describe 'the node' do
+        it { should have(4).elements }
+      end
     end
   end
 
