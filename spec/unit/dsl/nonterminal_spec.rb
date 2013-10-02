@@ -13,6 +13,8 @@ describe Katuv::DSL::Nonterminal do
     nonterminal.many(:foo)
   end
 
+  its(:type) { should == :nonterminal }
+
   its(:ast) do
     should == \
       s(:nonterminal,

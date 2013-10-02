@@ -8,4 +8,5 @@ describe Katuv::DSL::Terminal do
 
   subject(:terminal) { Katuv::DSL::Terminal.new(:term) }
   its(:ast) { should == s(:terminal, s(:name, :term)) }
+  its(:type) { should == :terminal }
 end

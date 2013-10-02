@@ -13,6 +13,8 @@ describe Katuv::DSL::Root do
     root.one(:bar)
   end
 
+  its(:type) { should == :root }
+
   its(:ast) do
     should == \
       s(:root,
