@@ -32,3 +32,11 @@ and be able to still write:
 
 have a `multiple` relationship define a pluralized method which
 just does: `children[MultipleRel]` -- if only for convenience
+
+# Extract into parts
+
+* katuv-core for the core DSL needed to define the DSL DSL.
+* katuv-dsl for the DSL defined by core (this requires katuv-core)
+* katuv-bootstrap -- a bootstrapped version of the DSL w/o Core loaded. (use unparse or something)
+* midrash -- a katuv dsl for defining whitequark/ast processors
+* katuv for the actual DSL-DSL that users-use, pulls in katuv-bootstrap, provides access to katuv-{core,dsl}
