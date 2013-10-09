@@ -32,7 +32,7 @@ module Katuv
 
       def ast
         [s(:namespace, namespace),
-         s(:nodes, *nodes.ast)]
+         nodes.ast]
       end
 
       private

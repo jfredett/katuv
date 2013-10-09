@@ -52,11 +52,13 @@ describe Katuv::DSL::Definition do
   end
 
 
-  it "creates an ast as expected" do
-    definition.ast.should == [
-      s(:namespace, :SomeNamespace),
-      s(:nodes, *definition.nodes.ast)
-    ]
+  describe '#ast' do
+    it "creates an ast as expected" do
+      definition.ast.should == [
+        s(:namespace, :SomeNamespace),
+        s(:nodes, *definition.nodes.ast)
+      ]
+    end
   end
 
   describe '#evaluate!' do
