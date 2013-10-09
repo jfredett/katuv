@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Terminal do
+describe Katuv::DSL::Node, Katuv::DSL::Terminal do
   it_behaves_like 'a relatable node called', :terminal do
     let(:klass) { Katuv::DSL::Terminal }
   end
