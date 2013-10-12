@@ -21,5 +21,11 @@ module Katuv
     def self.parse!(definition)
       s(:dsl, *definition.ast)
     end
+
+    def self.interpret!(compiled_definition)
+    end
+
+    def self.compile!(parsed_definition)
+    end
   end
 end

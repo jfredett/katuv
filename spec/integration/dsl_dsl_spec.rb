@@ -2,6 +2,12 @@
 require 'spec_helper'
 
 describe Katuv::DSL do
+  describe 'api' do
+    it { should respond_to :parse!     }
+    it { should respond_to :compile!   }
+    it { should respond_to :interpret! }
+  end
+
   let(:definition_block) { proc { shibboleth } }
 
   describe 'Katuv::DSL.define' do
