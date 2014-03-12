@@ -22,12 +22,14 @@ module Katuv
 
       private
 
+      attr_reader :already_added_root
+
       def added_root!
         @already_added_root = true
       end
 
       def already_added_root?
-        @already_added_root
+        already_added_root
       end
     end
   end

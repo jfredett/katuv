@@ -11,6 +11,10 @@ BlockNesting:
   Description: 'Avoid more than `Max` levels of nesting.'
   Max: 5
 
+SignalException:
+  Description: 'Checks for proper usage of fail and raise.'
+  Enabled: false
+
 # Align the elements of a hash literal if they span more than one line.
 AlignHash:
   # Alignment of entries using hash rocket as separator. Valid values are:

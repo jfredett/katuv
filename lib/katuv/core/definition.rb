@@ -27,7 +27,7 @@ module Katuv
 
       def evaluate!(&block)
         raise ArgumentError, 'must supply block' unless block_given?
-        instance_eval &block
+        instance_eval(&block)
       end
 
       def ast
@@ -39,7 +39,7 @@ module Katuv
 
       def create_node(type, name, &block)
         type.new(name).tap do |term|
-          term.instance_eval &block if block_given?
+          term.instance_eval(&block) if block_given?
           nodes << term
         end
       end
