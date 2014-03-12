@@ -1,0 +1,26 @@
+# Glossary of terms
+
+## DSLDL
+
+"Domain Specific Language Definition Language"
+
+Sometimes stylized "DSLdl", this is the language the end-user uses to define
+DSLs to be parsed by katuv
+
+### DSLDL (Core)
+
+Sometimes just called 'Core' or 'the Core'
+
+DSLdl (Core) is the core language defined by katuv/core, this is used to provide
+the higher level DSL used by the DSLDL (User). People not working on katuv
+proper will probably never need to use Core for anything.
+
+### DSLDL (User)
+
+Sometimes just called 'DSLDL'
+
+The language provided to the end user to develop DSLs.
+
+## Target DSL
+
+A DSL defined by katuv's DSLdl

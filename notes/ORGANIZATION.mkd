@@ -1,0 +1,11 @@
+# Organization
+
+## katuv/core
+
+The core DSLdl definition bootstrapping elements.
+
+## katuv/dsl
+
+Eventually, a DSLdl (core) definition of the DSLdl (end-user), u
+
+
