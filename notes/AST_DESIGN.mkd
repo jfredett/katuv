@@ -1,0 +1,75 @@
+# The Generated DSL's AST
+
+The type looks roughly like (in some Haskell-ish format)
+
+    AST = {
+      name     :: Symbol
+      type     :: Type
+      optional :: Bool
+      data     :: Metadata
+      children :: [AST]
+    }
+
+Metadata is basically a hash, it has one special key, called 'block', which
+contains the block that was provided to terminal nodes.
+
+Children is just a list of more AST elements.
+
+Multiplicity isn't tracked in the metadata associated with the node or in
+the 'data' element.
+
+## Usage
+
+A custom processor would ideally look like:
+
+
+    Processor.define '<some-name>' do
+      on name: <name-of-AST-element>  do
+        <some-code>
+      end
+
+      on type: <some-type> do
+        <some-code>
+      end
+
+      # etc
+    end
+
+Essentially some basic pattern matching ability would be good. the `#on` macro
+would work for anything in the main AST element, maybe a `#match` macro for doing
+subtree matching, like:
+
+    match { foo > bar.with(name: <some-name> }.and do
+      <some code>
+    end
+
+the `#with` macro would essentially do an introspection on the node data, and
+the `#>` method is like the CSS selector method.
+
+### Emitting new ASTs
+
+A processor is essentially just an AST processor from the `ast` gem, so
+hopefully, most of the AST emitting should be handled by that, but the ideal API
+would be something like:
+
+
+    on name: <something> do
+      if some_condition?(name)
+        foo name do
+          continue
+        end
+      else
+        bar name do
+          continue
+        end
+      end
+    end
+
+    match foo > bar do
+      foo_bar matched.children.map { |n| n.name }.join(', ') do
+        continue # should continue with the deepest match, i.e., the children of `foo`
+      end
+    end
+
+This makes it easy to use the DSL to process the DSL. The `#match` macro allows
+for condensing, the `#on` macro allows for expansion.
