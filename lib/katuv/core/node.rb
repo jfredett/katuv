@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Katuv
-  module DSL
+  module Core
     module Node
       def initialize(name)
         @name = name

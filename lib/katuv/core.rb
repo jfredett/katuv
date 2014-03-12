@@ -1,17 +1,17 @@
 # encoding: utf-8
 
-require 'katuv/dsl/definition'
-require 'katuv/dsl/nodes'
-require 'katuv/dsl/node'
-require 'katuv/dsl/relationships'
-require 'katuv/dsl/relationship'
-require 'katuv/dsl/terminal'
-require 'katuv/dsl/nonterminal'
-require 'katuv/dsl/root'
-require 'katuv/dsl/errors'
+require 'katuv/core/definition'
+require 'katuv/core/nodes'
+require 'katuv/core/node'
+require 'katuv/core/relationships'
+require 'katuv/core/relationship'
+require 'katuv/core/terminal'
+require 'katuv/core/nonterminal'
+require 'katuv/core/root'
+require 'katuv/core/errors'
 
 module Katuv
-  module DSL
+  module Core
     def self.define(namespace, &block)
       Definition.new(namespace).tap do |defn|
         defn.evaluate!(&block) if block_given?

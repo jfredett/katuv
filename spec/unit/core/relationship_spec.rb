@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Relationship do
+describe Katuv::Core::Relationship do
   describe 'api' do
-    subject { Katuv::DSL::Relationship.new(nil, nil) }
+    subject { Katuv::Core::Relationship.new(nil, nil) }
 
     context 'class' do
       its(:class) { should respond_to :many       }
@@ -22,7 +22,7 @@ describe Katuv::DSL::Relationship do
   end
 
   describe 'many relationship' do
-    subject(:relation) { Katuv::DSL::Relationship.many(:RelationshipName) }
+    subject(:relation) { Katuv::Core::Relationship.many(:RelationshipName) }
 
     its(:type) { should == :many }
     its(:name) { should == :RelationshipName }
@@ -37,7 +37,7 @@ describe Katuv::DSL::Relationship do
   end
 
   describe 'maybe many relationship' do
-    subject(:relation) { Katuv::DSL::Relationship.maybe_many(:RelationshipName) }
+    subject(:relation) { Katuv::Core::Relationship.maybe_many(:RelationshipName) }
 
     its(:type) { should == :many }
     its(:name) { should == :RelationshipName }
@@ -52,7 +52,7 @@ describe Katuv::DSL::Relationship do
   end
 
   describe 'one relationship' do
-    subject(:relation) { Katuv::DSL::Relationship.one(:RelationshipName) }
+    subject(:relation) { Katuv::Core::Relationship.one(:RelationshipName) }
 
     its(:type) { should == :single }
     its(:name) { should == :RelationshipName }
@@ -67,7 +67,7 @@ describe Katuv::DSL::Relationship do
   end
 
   describe 'maybe one relationship' do
-    subject(:relation) { Katuv::DSL::Relationship.maybe_one(:RelationshipName) }
+    subject(:relation) { Katuv::Core::Relationship.maybe_one(:RelationshipName) }
 
     its(:type) { should == :single }
     its(:name) { should == :RelationshipName }
@@ -82,7 +82,7 @@ describe Katuv::DSL::Relationship do
   end
 end
 
-describe Katuv::DSL::OptionalRelationship do
-  subject { Katuv::DSL::OptionalRelationship.new(nil, nil) }
+describe Katuv::Core::OptionalRelationship do
+  subject { Katuv::Core::OptionalRelationship.new(nil, nil) }
   its(:optional?) { should be true }
 end

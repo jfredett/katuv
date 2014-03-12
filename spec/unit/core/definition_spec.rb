@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Definition do
+describe Katuv::Core::Definition do
   let(:block) { proc { shibboleth } }
-  subject(:definition) { Katuv::DSL::Definition.new(:SomeNamespace) }
+  subject(:definition) { Katuv::Core::Definition.new(:SomeNamespace) }
 
   describe 'api of the returned object' do
     it { should respond_to :terminal    }
@@ -25,7 +25,7 @@ describe Katuv::DSL::Definition do
     expect do
       definition.root(:root1)
       definition.root(:root2)
-    end.to raise_error Katuv::DSL::MultipleRootsError
+    end.to raise_error Katuv::Core::MultipleRootsError
   end
 
   it "raises no error when trying to define more nodes after the root node has been defined"  do
@@ -74,19 +74,19 @@ describe Katuv::DSL::Definition do
 
   describe '#terminal' do
     it_should_behave_like 'a node called', :terminal do
-      let(:klass) { Katuv::DSL::Terminal }
+      let(:klass) { Katuv::Core::Terminal }
     end
   end
 
   describe '#nonterminal' do
     it_should_behave_like 'a node called', :nonterminal do
-      let(:klass) { Katuv::DSL::Nonterminal }
+      let(:klass) { Katuv::Core::Nonterminal }
     end
   end
 
   describe '#root' do
     it_should_behave_like 'a node called', :root do
-      let(:klass) { Katuv::DSL::Root }
+      let(:klass) { Katuv::Core::Root }
     end
   end
 end

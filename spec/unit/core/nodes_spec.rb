@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Nodes do
-  subject(:nodes) { Katuv::DSL::Nodes.new }
+describe Katuv::Core::Nodes do
+  subject(:nodes) { Katuv::Core::Nodes.new }
 
   describe 'api' do
     it { should respond_to :ast }
@@ -37,7 +37,7 @@ describe Katuv::DSL::Nodes do
   describe '#ast' do
     context 'root node ast' do
       before do
-        nodes << Katuv::DSL::Root.new(:root)
+        nodes << Katuv::Core::Root.new(:root)
       end
 
       describe 'the ast' do
@@ -57,7 +57,7 @@ describe Katuv::DSL::Nodes do
 
     context 'nonterminal node ast' do
       before do
-        nodes << Katuv::DSL::Nonterminal.new(:nonterm)
+        nodes << Katuv::Core::Nonterminal.new(:nonterm)
       end
 
       describe 'the ast' do
@@ -77,7 +77,7 @@ describe Katuv::DSL::Nodes do
 
     context 'terminal node ast' do
       before do
-        nodes << Katuv::DSL::Terminal.new(:term)
+        nodes << Katuv::Core::Terminal.new(:term)
       end
 
       describe 'the ast' do
@@ -97,10 +97,10 @@ describe Katuv::DSL::Nodes do
 
     context 'mixed nodeset ast' do
       before do
-        nodes << Katuv::DSL::Terminal.new(:term1)
-        nodes << Katuv::DSL::Terminal.new(:term2)
-        nodes << Katuv::DSL::Nonterminal.new(:nonterm3)
-        nodes << Katuv::DSL::Root.new(:root)
+        nodes << Katuv::Core::Terminal.new(:term1)
+        nodes << Katuv::Core::Terminal.new(:term2)
+        nodes << Katuv::Core::Nonterminal.new(:nonterm3)
+        nodes << Katuv::Core::Root.new(:root)
       end
 
       describe 'the ast' do
@@ -118,15 +118,15 @@ describe Katuv::DSL::Nodes do
 
   specify "raise an error if trying to add multiple roots" do
     expect do
-      nodes << Katuv::DSL::Root.new(:root1)
-      nodes << Katuv::DSL::Root.new(:root2)
-    end.to raise_error Katuv::DSL::MultipleRootsError
+      nodes << Katuv::Core::Root.new(:root1)
+      nodes << Katuv::Core::Root.new(:root2)
+    end.to raise_error Katuv::Core::MultipleRootsError
   end
 
   specify "do not disallow adding other nodes after adding the root" do
     expect do
-      nodes << Katuv::DSL::Root.new(:root1)
-      nodes << Katuv::DSL::Terminal.new(:foo)
+      nodes << Katuv::Core::Root.new(:root1)
+      nodes << Katuv::Core::Terminal.new(:foo)
     end.to_not raise_error
   end
 end

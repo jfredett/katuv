@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Node, Katuv::DSL::Root do
+describe Katuv::Core::Node, Katuv::Core::Root do
   it_behaves_like 'a relatable node called', :root do
-    let(:klass) { Katuv::DSL::Root }
+    let(:klass) { Katuv::Core::Root }
   end
 
-  subject(:root) { Katuv::DSL::Root.new(:root) }
+  subject(:root) { Katuv::Core::Root.new(:root) }
 
   before do
     root.many(:foo)

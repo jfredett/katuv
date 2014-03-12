@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Node, Katuv::DSL::Nonterminal do
+describe Katuv::Core::Node, Katuv::Core::Nonterminal do
   it_behaves_like 'a relatable node called', :nonterminal do
-    let(:klass) { Katuv::DSL::Nonterminal }
+    let(:klass) { Katuv::Core::Nonterminal }
   end
 
-  subject(:nonterminal) { Katuv::DSL::Nonterminal.new(:nonterm) }
+  subject(:nonterminal) { Katuv::Core::Nonterminal.new(:nonterm) }
 
   before do
     nonterminal.one(:bar)

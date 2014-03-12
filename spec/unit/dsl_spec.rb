@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL do
+describe Katuv::Core do
   describe 'api' do
     it { should respond_to :parse!     }
     it { should respond_to :define     }
@@ -14,7 +14,7 @@ describe Katuv::DSL do
       definition.stub(:ast).and_return([])
     end
 
-    subject(:definition_ast) { Katuv::DSL.parse!(definition) }
+    subject(:definition_ast) { Katuv::Core.parse!(definition) }
 
     specify "calls out to the definition to get it's ast" do
       definition_ast # parse the dsl definition

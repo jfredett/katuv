@@ -5,11 +5,11 @@ require 'katuv/version'
 require 'ast'
 require 'delegate'
 
-require 'katuv/dsl'
+require 'katuv/core'
 
 module Katuv
   def self.dsl(namespace, &block)
-    raise DSL::NoDefinitionBlock unless block_given?
-    DSL.define(namespace, &block)
+    raise Core::NoDefinitionBlock unless block_given?
+    Core.define(namespace, &block)
   end
 end

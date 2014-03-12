@@ -1,5 +1,5 @@
 module Katuv
-  module DSL
+  module Core
     class MultipleRootsError < ArgumentError ; end
   end
 end

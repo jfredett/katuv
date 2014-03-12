@@ -101,7 +101,7 @@ describe Katuv do
   end
 
   before do
-    Katuv::DSL.compile!(Katuv::DSL.parse!(the_example_dsl))
+    Katuv::Core.compile!(Katuv::Core.parse!(the_example_dsl))
   end
 
   specify "the example dsl script should parse" do

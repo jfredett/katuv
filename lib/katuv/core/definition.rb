@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Katuv
-  module DSL
+  module Core
     class Definition
       def initialize(namespace)
         @namespace = namespace

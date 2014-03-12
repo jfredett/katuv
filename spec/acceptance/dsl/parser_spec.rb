@@ -70,6 +70,6 @@ describe Katuv, 'the dsl-dsl' do
   end
 
   specify "The example DSL code should parse into the expected parse tree" do
-    Katuv::DSL.parse!(the_example_dsl).should == the_sexp_ast
+    Katuv::Core.parse!(the_example_dsl).should == the_sexp_ast
   end
 end

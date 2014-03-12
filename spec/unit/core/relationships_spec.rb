@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::DSL::Relationships do
-  subject(:relationships) { Katuv::DSL::Relationships.new }
+describe Katuv::Core::Relationships do
+  subject(:relationships) { Katuv::Core::Relationships.new }
 
   describe 'api' do
     it { should respond_to :<< }
@@ -37,7 +37,7 @@ describe Katuv::DSL::Relationships do
 
   describe '#ast' do
     context 'nonoptional many relationship' do
-      let(:example_relationship) { Katuv::DSL::Relationship.many(:relationship) }
+      let(:example_relationship) { Katuv::Core::Relationship.many(:relationship) }
       before { relationships << example_relationship }
 
       specify { should include example_relationship }
@@ -62,7 +62,7 @@ describe Katuv::DSL::Relationships do
     end
 
     context 'optional many relationship' do
-      let(:example_relationship) { Katuv::DSL::Relationship.maybe_many(:relationship) }
+      let(:example_relationship) { Katuv::Core::Relationship.maybe_many(:relationship) }
       before { relationships << example_relationship }
 
 
@@ -88,7 +88,7 @@ describe Katuv::DSL::Relationships do
     end
 
     context 'nonoptional single relationship' do
-      let(:example_relationship) { Katuv::DSL::Relationship.one(:relationship) }
+      let(:example_relationship) { Katuv::Core::Relationship.one(:relationship) }
       before { relationships << example_relationship }
 
       specify { should include example_relationship }
@@ -113,7 +113,7 @@ describe Katuv::DSL::Relationships do
     end
 
     context 'optional single relationship' do
-      let(:example_relationship) { Katuv::DSL::Relationship.maybe_one(:relationship) }
+      let(:example_relationship) { Katuv::Core::Relationship.maybe_one(:relationship) }
       before { relationships << example_relationship }
 
       specify { should include example_relationship }

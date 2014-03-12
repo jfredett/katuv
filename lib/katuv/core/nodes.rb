@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Katuv
-  module DSL
+  module Core
     class Nodes < DelegateClass(Array)
       def initialize
         super([])

@@ -1,5 +1,5 @@
 module Katuv
-  module DSL
+  module Core
     class NoDefinitionBlock < ArgumentError ; end
   end
 end
