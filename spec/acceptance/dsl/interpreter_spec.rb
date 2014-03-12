@@ -104,11 +104,13 @@ describe Katuv do
     Katuv::Core.compile!(Katuv::Core.parse!(the_example_dsl))
   end
 
-  specify "the example dsl script should parse" do
-    expect { example_dsl_script }.to_not raise_error
-  end
+  pending 'implementation' do
+    specify "the example dsl script should parse" do
+      expect { example_dsl_script }.to_not raise_error
+    end
 
-  specify "the example dsl script should produce an AST" do
-
+    specify "the example dsl script should produce an AST" do
+      example_dsl_script.shoule == expected_ast
+    end
   end
 end
