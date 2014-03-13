@@ -10,6 +10,10 @@ module Katuv
         process namespace
         process definition
       end
+
+      def on_namespace(node)
+        @namespace = Object.const_set(node.children.first, Module.new)
+      end
     end
   end
 end
