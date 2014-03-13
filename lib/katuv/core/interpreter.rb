@@ -14,6 +14,10 @@ module Katuv
       def on_namespace(node)
         @namespace = Object.const_set(node.children.first, Module.new)
       end
+
+      def on_nodes(nodes)
+        process_all(*nodes)
+      end
     end
   end
 end

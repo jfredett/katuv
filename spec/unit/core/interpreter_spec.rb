@@ -33,4 +33,16 @@ describe Katuv::Core::Interpreter do
       Object.send(:remove_const, :Foo)
     end
   end
+
+  describe '#on_nodes' do
+    let(:node_list) { double("dummy sexp") }
+    let(:sexp) { s(:nodes, node_list) }
+    before do
+      interpreter.stub(:process_all).with(node_list)
+      interpreter.on_nodes(sexp)
+    end
+
+    it { should respond_to :on_nodes }
+    it { should have_received(:process_all).with(node_list) }
+  end
 end
