@@ -18,4 +18,19 @@ describe Katuv::Core::Interpreter do
     it { should have_received(:process).with(namespace) }
     it { should have_received(:process).with(definition_subtree) }
   end
+
+  describe '#on_namespace' do
+    let(:sexp) { s(:namespace, :Foo) }
+
+    it 'creates the namespace module specified by the symbol in the cdr position' do
+      Object.const_defined?(:Foo).should be false
+      interpreter.on_namespace(sexp)
+      Object.const_defined?(:Foo).should be true
+      Object.const_get(:Foo).should be_a Module
+    end
+
+    after do
+      Object.send(:remove_const, :Foo)
+    end
+  end
 end
