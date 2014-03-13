@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::DSL::Interpreter do
-  subject(:interpreter) { Katuv::Core::DSL::Interpreter.new }
+describe Katuv::Core::Interpreter::DSL do
+  subject(:interpreter) { Katuv::Core::Interpreter::DSL.new }
 
   describe '#on_dsl' do
     let(:namespace) { double('namespace element') }
@@ -45,4 +45,9 @@ describe Katuv::Core::DSL::Interpreter do
     it { should respond_to :on_nodes }
     it { should have_received(:process_all).with(node_list) }
   end
+
+  describe '#on_terminal'
+  describe '#on_nonterminal'
+  describe '#on_root'
+
 end
