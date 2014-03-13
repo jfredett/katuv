@@ -9,6 +9,7 @@ require 'katuv/core/terminal'
 require 'katuv/core/nonterminal'
 require 'katuv/core/root'
 require 'katuv/core/errors'
+require 'katuv/core/interpreter'
 
 module Katuv
   module Core
@@ -22,7 +23,8 @@ module Katuv
       s(:dsl, *definition.ast)
     end
 
-    def self.interpret!(compiled_definition)
+    def self.interpret!(parsed_definition)
+      Interpreter.new.process(parsed_definition)
     end
 
     def self.compile!(parsed_definition)

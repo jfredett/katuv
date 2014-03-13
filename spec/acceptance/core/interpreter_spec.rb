@@ -101,7 +101,7 @@ RSpec.describe Katuv do
   end
 
   before do
-    Katuv::Core.compile!(Katuv::Core.parse!(the_example_dsl))
+    Katuv::Core.interpret!(Katuv::Core.parse!(the_example_dsl))
   end
 
   pending 'implementation' do
