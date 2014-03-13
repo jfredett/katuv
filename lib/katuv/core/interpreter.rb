@@ -4,6 +4,12 @@ module Katuv
   module Core
     # Convert a DSLDL AST and produce something that compiles a DSL AST
     class Interpreter < AST::Processor
+      def on_dsl(node)
+        namespace, definition = *node
+
+        process namespace
+        process definition
+      end
     end
   end
 end
