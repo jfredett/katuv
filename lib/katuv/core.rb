@@ -24,7 +24,7 @@ module Katuv
     end
 
     def self.interpret!(parsed_definition)
-      Interpreter.new.process(parsed_definition)
+      Interpreter::DSL.new.process(parsed_definition)
     end
 
     def self.compile!(parsed_definition)

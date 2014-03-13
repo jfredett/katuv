@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Interpreter do
-  subject(:interpreter) { Katuv::Core::Interpreter.new }
+describe Katuv::Core::DSL::Interpreter do
+  subject(:interpreter) { Katuv::Core::DSL::Interpreter.new }
 
   describe '#on_dsl' do
     let(:namespace) { double('namespace element') }
