@@ -65,12 +65,13 @@ describe Katuv::Core::Interpreter::Node do
       interpreter.on_associations(sexp)
     end
 
-    it 'adds an association to the #associations list' do
-      interpreter.associations.should have(1).element
-      interpreter.associations.first.should == dummy_association
-    end
+    it { should have(1).associations }
   end
 
+  describe '#on_name' do
+    let(:sexp) { s(:name, :foo) }
+    before { interpreter.on_name(sexp) }
+    its(:name) { should == :foo }
   end
 
   describe '#on_type' do
