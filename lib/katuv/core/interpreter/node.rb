@@ -9,7 +9,6 @@ module Katuv
           @associations = []
         end
 
-
         def on_root(node)
           @type = :root
           dispatch_node(node)
@@ -26,6 +25,7 @@ module Katuv
         end
 
         def on_associations(node)
+          @associations << Association.new.process(node)
         end
 
         def on_name(node)
