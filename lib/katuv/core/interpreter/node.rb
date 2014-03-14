@@ -25,7 +25,9 @@ module Katuv
         end
 
         def on_associations(node)
-          @associations << Association.new.process(node)
+          @associations << Association.new.tap do |assoc_processor|
+            assoc_processor.process node
+          end
         end
 
         def on_name(node)
