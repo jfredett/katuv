@@ -36,7 +36,7 @@ describe Katuv::Core::Interpreter::Node do
 
     its(:name) { should == :Foo }
     its(:type) { should == :terminal }
-    it { should_not have associations }
+    its(:associations) { should be_empty }
   end
 
   describe 'nonterminal node' do
