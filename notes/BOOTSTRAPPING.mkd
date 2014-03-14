@@ -1,0 +1,40 @@
+# Bootstrapping katuv, a rough sketch
+
+The Katuv DSLDL written in Katuv DSLDL
+
+    Katuv.dsl :Katuv do
+      root :dsl do
+        maybe_many :terminal
+        maybe_many :nonterminal
+        one :root
+      end
+
+      terminal :terminal
+
+      nonterminal :nonterminal do
+        maybe_many :maybe_many
+        maybe_many :many
+        maybe_many :maybe_one
+        maybe_many :one
+      end
+
+      nonterminal :root do
+        maybe_many :maybe_many
+        maybe_many :many
+        maybe_many :maybe_one
+        maybe_many :one
+      end
+
+      terminal :maybe_many
+      terminal :many
+      terminal :maybe_one
+      terminal :one
+    end
+
+As an idea -- turn this gem into 'katuv-core', then define a new gem 'katuv',
+which defines a DSDL based on the 'katuv-core' DSLDL as above. From there, we
+can introduce all sorts of new features using the AST::Processor functionality
+provided by the `ast` gem.
+
+
+

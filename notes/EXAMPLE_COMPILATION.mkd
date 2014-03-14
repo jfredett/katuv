@@ -1,0 +1,263 @@
+# Example compilation of a Katuv DSL
+
+Given the initial DSLDL definition:
+
+
+    Katuv.dsl :ExampleDSL do
+      terminal :Foo
+
+      nonterminal :Bar do
+        one :Foo
+      end
+
+      nonterminal :Baz do
+        one :Foo
+        maybe_one :Bar
+      end
+
+      nonterminal :Bingle do
+        many :Foo
+      end
+
+      root :my_dsl do
+        maybe_one :Baz
+        one :Bingle
+        many :Foo
+      end
+    end
+
+We get the DSLDL-AST of:
+
+    s(:dsl,
+      s(:namespace, :ExampleDSL),
+      s(:nodes,
+        s(:terminal, s(:name, :Foo)),
+        s(:nonterminal,
+          s(:name, :Bar),
+          s(:associations,
+            s(:association,
+              s(:name, :Foo),
+              s(:type, :single),
+              s(:optional?, false)))),
+        s(:nonterminal,
+          s(:name, :Baz),
+          s(:associations,
+            s(:association,
+              s(:name, :Foo),
+              s(:type, :single),
+              s(:optional?, false)),
+            s(:association,
+              s(:name, :Bar),
+              s(:type, :single),
+              s(:optional?, true)))),
+        s(:nonterminal,
+          s(:name, :Bingle),
+          s(:associations,
+            s(:association,
+              s(:name, :Foo),
+              s(:type, :many),
+              s(:optional?, false)))),
+        s(:root,
+            s(:name, :my_dsl),
+            s(:associations,
+              s(:association,
+                s(:name, :Baz),
+                s(:type, :single),
+                s(:optional?, true)),
+              s(:association,
+                s(:name, :Baz),
+                s(:type, :single),
+                s(:optional?, false)),
+              s(:association,
+                s(:name, :Foo),
+                s(:type, :multiple),
+                s(:optional?, false))))))
+
+This, in turn, generates code equivalent to:
+
+    # from katuv/dsl
+    module Katuv
+      module DSL
+        module Context
+          attr_reader :name, :data, :block, :validations, :children
+
+          def initialize(name, data, &block)
+            @name = name
+            @data = data
+            @block = block
+            @validations = []
+            @children = []
+            instance_eval(&block)
+          end
+
+          def included(host)
+            host.extend(ClassMethods)
+            super
+          end
+
+          def ast
+            s(name,
+              s(:meta, meta),
+              s(:children, *children.map(&:ast)))
+          end
+
+          def meta
+            data.merge(block: block)
+          end
+
+          def validate!
+            # run all the validations
+          end
+
+          module ClassMethods
+            def add_validation(validation)
+              validation.each do |method, validators|
+                validators.each do |validator|
+                  # define validation code somehow, maybe use that external
+                  # validator gem? (mbj/vanguard)
+
+                  # should validations live at the top of the tree and run
+                  # across the whole sexp? or run across children lower down
+                  # (probably the latter)
+
+                  # maybe a few reusable external validators in
+                  # DSL::Validator::<something>, parameterize each instance by
+                  # dispatch method name, then:
+                  #     #valid? = children.all?(&:valid?) && run_validators
+                  # validation results would have to be wound up as well 
+                end
+              end
+            end
+
+            def add_dispatch_method(method)
+              context_klass = lookup_context method
+              define_method(method) do |name = "", data = {}, &block|
+                @children << context_klass.new(name, data, &block)
+              end
+            end
+          end
+        end
+      end
+    end
+
+
+    # generated in memory
+    module ExampleDSL
+      def self.my_dsl(name = "", data = {}, &block)
+        Root.new(name, data, &block)
+      end
+
+      class Root
+        include DSL::Context
+
+        add_validation(baz: [:optional, :single],
+                       bar: [:required, :single],
+                       foo: [:required, :multiple])
+
+        add_dispatch_method :Baz
+        add_dispatch_method :Bingle
+        add_dispatch_method :Foo
+      end
+
+      class Foo
+        include DSL::Context
+
+        terminal!
+      end
+
+      class Bar
+        include DSL::Context
+
+        add_validation foo: [:required, :single]
+
+        add_dispatch_method :Foo
+      end
+
+      class Baz
+        include DSL::Context
+
+        add_validation(foo: [:required, :single],
+                       bar: [:optional, :single])
+
+        add_dispatch_method :Foo
+        add_dispatch_method :Bar
+      end
+
+      class Bingle
+        include DSL::Context
+
+        add_validation(foo: [:required, :multiple])
+
+        add_dispatch_method :Foo
+      end
+    end
+
+Which parses a DSL like:
+
+    ExampleDSL.my_dsl
+      foo "xyz"
+      foo "123", key: :value
+      foo "abc" do
+        some_block
+      end
+
+      baz "some name" do
+        foo "in a baz block"
+        bar "some other name" do
+          foo "in a bar block"
+        end
+      end
+
+      bingle "requires block", key: :value do
+        foo "at least one foo required in here"
+      end
+    end
+
+Which yields an AST like (where `<block_provided>` is precisely the block given
+to the actual DSL method):
+
+
+    s(:my_dsl,
+      s(:meta, { name: nil, type: :root, optional?: false, data: { block: <block_provided> } }),
+      s(:children,
+        s(:foo,
+          s(:meta, { name: 'xyz', type: :terminal, optional?: false, data: {} })),
+        s(:foo,
+          s(:meta, { name: '123', type: :terminal, optional?: false, data: { key: :value } })),
+        s(:foo,
+          s(:meta, { name: 'abc', type: :terminal, optional?: false, data: { block: <block_provided> } })),
+        s(:baz,
+          s(:meta, { name: 'some name', type: :nonterminal, optional?: true, data: { block: <block_provided> } }),
+          s(:children,
+            s(:foo,
+              s(:meta, { name: 'in a baz block', type: :terminal, optional?: false,
+                         data: { block: <block_provided> }})),
+            s(:bar,
+              s(:meta, { name: 'some other name', type: :terminal, optional?: true,
+                         data: { block: <block_provided> }}),
+              s(:children,
+                s(:foo,
+                  s(:meta, { name: 'in a bar block', type: :terminal, optional?: false,
+                             data: { block: <block_provided> }})))))),
+        s(:bingle,
+          s(:meta, { name: 'requires block', type: :nonterminal, optional?: false,
+                     data: { block: <block_provided>, key: :value }}),
+          s(:children,
+            s(:foo,
+              s(:meta, { name: 'at least one foo require in here', type: :terminal, optional?: false,
+                         data: { block: <block_provided> }}))))))
+
+This may then be processed at will into whatever structure the end user wants
+using the normal `AST::Processor` tools.
+
+# Questions
+
+- Do we need to preserve the type/optional?/quantity information?
+- Should we just drop everything in the toplevel meta-hash, rather than the
+  added layer of indirection with `meta[:data][<key>]`
+- How can we _compile_ this code, to a static sourcefile that can be included
+  w/o requiring re-interpretation/etc?
+    * Valuable for performance, probably
+    * Mostly needed for _bootstrapping_, ideally future katuv extensions are
+      just processors interpreting a katuv 
+  
