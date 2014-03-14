@@ -32,6 +32,9 @@ module Katuv
           @name = node.children.first
         end
 
+        def on_type(node)
+          @type = node.children.first
+        end
 
         private
         def dispatch_node(node)

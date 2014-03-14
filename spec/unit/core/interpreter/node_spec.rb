@@ -72,4 +72,10 @@ describe Katuv::Core::Interpreter::Node do
   end
 
   end
+
+  describe '#on_type' do
+    let(:sexp) { s(:type, :foo) }
+    before { interpreter.on_type(sexp) }
+    its(:type) { should == :foo }
+  end
 end
