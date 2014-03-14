@@ -55,6 +55,21 @@ describe Katuv::Core::Interpreter::Node do
   end
 
   describe '#on_associations' do
+    let(:sexp) { double('dummy sexp') }
+    let(:dummy_association) { double('dummy association') }
+    before do
+      Katuv::Core::Interpreter::Association.
+        any_instance.
+        stub(:process).with(sexp).
+        and_return(dummy_association)
+      interpreter.on_associations(sexp)
+    end
+
+    it 'adds an association to the #associations list' do
+      interpreter.associations.should have(1).element
+      interpreter.associations.first.should == dummy_association
+    end
+  end
 
   end
 end
