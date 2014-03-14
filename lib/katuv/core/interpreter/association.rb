@@ -18,9 +18,10 @@ module Katuv
           @optional = node.children.first
         end
 
-        private :optional
         def optional?; optional; end
         def required?; !optional; end
+
+        private :optional
       end
     end
   end
