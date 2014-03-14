@@ -72,7 +72,7 @@ describe Katuv::Core::Interpreter::Node do
       context 'the second association' do
         subject { interpreter.associations[1] }
 
-        its(:name) { should == :Foo }
+        its(:name) { should == :Bar }
         its(:type) { should == :single }
         it { should be_optional }
         it { should_not be_required }
