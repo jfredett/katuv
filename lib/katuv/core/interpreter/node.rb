@@ -24,7 +24,8 @@ module Katuv
           dispatch_node(node)
         end
 
-        def on_associations(node)
+        alias on_associations process_all
+        def on_association(node)
           @associations << Association.new.tap do |assoc_processor|
             assoc_processor.process node
           end
