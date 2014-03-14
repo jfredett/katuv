@@ -54,18 +54,14 @@ describe Katuv::Core::Interpreter::Node do
     it { should have_received(:process).with(fake_name) }
   end
 
-  describe '#on_associations' do
-    let(:sexp) { double('dummy sexp') }
-    let(:dummy_association) { double('dummy association') }
-    before do
-      Katuv::Core::Interpreter::Association.
-        any_instance.
-        stub(:process).with(sexp).
-        and_return(dummy_association)
-      interpreter.on_associations(sexp)
-    end
+  describe '#on_association' do
+    let(:sexp) { s(:association, double('sexp')) }
 
-    it { should have(1).associations }
+    it "invokes the Association processor" do
+      Katuv::Core::Interpreter::Association
+        .any_instance.should_receive(:process).with(sexp)
+      interpreter.on_association(sexp)
+    end
   end
 
   describe '#on_name' do
