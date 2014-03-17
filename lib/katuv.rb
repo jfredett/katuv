@@ -5,7 +5,9 @@ require 'katuv/version'
 require 'ast'
 require 'delegate'
 
+require 'katuv/utility'
 require 'katuv/core'
+require 'katuv/dsl'
 
 module Katuv
   def self.dsl(namespace, &block)
