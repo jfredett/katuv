@@ -18,21 +18,19 @@ module Katuv
         end
 
         def on_root(node)
-          node_def = NodeInterpreter.new.process(node)
-          binding.pry
         end
 
         def on_nonterminal(node)
-          node_def = NodeInterpreter.new.process(node)
-          # define context class
-          #   define execution method on context class
-
-
         end
 
         def on_terminal(node)
-          node_def = NodeInterpreter.new.process(node)
+        end
 
+        def define_node(node)
+          node_def = Node.new.process(node)
+          # create a new context class in the namespace
+          # define methods in the new context class for the associations
+          # add validations to the context class
         end
 
         private
