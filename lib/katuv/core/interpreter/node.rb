@@ -9,6 +9,8 @@ module Katuv
           @associations = []
         end
 
+        # Processor Methods
+
         def on_root(node)
           @type = :root
           dispatch_node(node)
@@ -39,7 +41,14 @@ module Katuv
           @type = node.children.first
         end
 
+        # Proper Methods
+
+        def find_associations_by_name(name)
+          associations.select { |association| association.name == name }
+        end
+
         private
+
         def dispatch_node(node)
           name, associations = *node
 
