@@ -6,6 +6,31 @@ describe Katuv::Core::Interpreter::Node do
   let(:fake_associations) { double('associations') }
   let(:fake_name) { double('associations') }
 
+  describe '#find_associations_by_name' do
+    let(:sexp) do
+      s(:root,
+        s(:name, :test),
+        s(:associations,
+          s(:association,
+              s(:name, :example),
+              s(:type, :single),
+              s(:optional?, false))))
+    end
+    before { interpreter.process(sexp) }
+
+    context 'when there is an association with the given name' do
+      subject { interpreter.find_associations_by_name(:example) }
+
+      it { should have(1).element }
+    end
+
+    context 'when there is not an association with the given name' do
+      subject { interpreter.find_associations_by_name(:unexample) }
+
+      it { should have(0).elements }
+    end
+  end
+
   describe '#on_root' do
     let(:sexp) do
       s(:root,
