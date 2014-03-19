@@ -4,7 +4,7 @@ module Katuv
       class Validation
         include Concord.new(:name)
 
-        attr_reader :result
+        attr_reader :result, :name
 
         private
 
