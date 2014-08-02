@@ -42,6 +42,9 @@ AlignHash:
   #   bb: 1
   EnforcedColonStyle: separator
 
+AlignParameters:
+  Enabled: false
+
 IfWithSemicolon:
   Enabled: false
 
