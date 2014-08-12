@@ -60,7 +60,6 @@ RSpec.describe Katuv do
     end
   end
 
-
   # see notes/AST_DESIGN.mkd for details on the format.
   let(:expected_ast) do
     s(:my_dsl,
@@ -105,12 +104,12 @@ RSpec.describe Katuv do
   end
 
   pending 'implementation' do
-    specify "the example dsl script should parse" do
+    specify 'the example dsl script should parse' do
       expect { example_dsl_script }.to_not raise_error
     end
 
-    specify "the example dsl script should produce an AST" do
-      example_dsl_script.shoule == expected_ast
+    specify 'the example dsl script should produce an AST' do
+      example_dsl_script.should == expected_ast
     end
   end
 end
