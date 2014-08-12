@@ -1,0 +1,69 @@
+LineLength:
+  Description: 'Limit lines to 120 characters.'
+  Max: 120
+
+MethodLength:
+  Description: 'Avoid methods longer than 25 lines of code.'
+  CountComments: false  # count full line comments?
+  Max: 25
+
+BlockNesting:
+  Description: 'Avoid more than `Max` levels of nesting.'
+  Max: 5
+
+SignalException:
+  Description: 'Checks for proper usage of fail and raise.'
+  Enabled: false
+
+# Align the elements of a hash literal if they span more than one line.
+AlignHash:
+  # Alignment of entries using hash rocket as separator. Valid values are:
+  #
+  # key - left alignment of keys
+  #   'a' => 2
+  #   'bb' => 3
+  # separator - alignment of hash rockets, keys are right aligned
+  #    'a' => 2
+  #   'bb' => 3
+  # table - left alignment of keys, hash rockets, and values
+  #   'a'  => 2
+  #   'bb' => 3
+  EnforcedHashRocketStyle: table
+  # Alignment of entries using colon as separator. Valid values are:
+  #
+  # key - left alignment of keys
+  #   a: 0
+  #   bb: 1
+  # separator - alignment of colons, keys are right aligned
+  #    a: 0
+  #   bb: 1
+  # table - left alignment of keys and values
+  #   a:  0
+  #   bb: 1
+  EnforcedColonStyle: separator
+
+AlignParameters:
+  Enabled: false
+
+IfWithSemicolon:
+  Enabled: false
+
+Semicolon:
+  Enabled: false
+
+AssignmentInCondition:
+  Enabled: false
+
+Alias:
+  Enabled: false
+
+NumericLiterals:
+  Enabled: false
+
+# should be dynamic if it's being used for test
+RescueModifier:
+  Enabled: false
+
+# should be turned on as a separate task
+Documentation:
+  Enabled: false
