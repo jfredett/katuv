@@ -18,3 +18,4 @@ tmp
 coverage/
 .rbx
 .DS_Store
+.rspec_status
