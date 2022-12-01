@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core do
+RSpec.describe Katuv::Core do
   describe 'api' do
     it { should respond_to :parse!     }
     it { should respond_to :compile!   }

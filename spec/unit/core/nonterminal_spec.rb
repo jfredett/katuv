@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Node, Katuv::Core::Nonterminal do
+RSpec.describe Katuv::Core::Node, Katuv::Core::Nonterminal do
   it_behaves_like 'a relatable node called', :nonterminal do
     let(:klass) { Katuv::Core::Nonterminal }
   end

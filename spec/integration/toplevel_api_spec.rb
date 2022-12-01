@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv do
+RSpec.describe Katuv do
   let(:definition_block) { proc { shibboleth } }
 
   describe '.dsl' do

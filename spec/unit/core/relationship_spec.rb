@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Relationship do
+RSpec.describe Katuv::Core::Relationship do
   describe 'api' do
     subject { Katuv::Core::Relationship.new(nil, nil) }
 
@@ -29,10 +29,10 @@ describe Katuv::Core::Relationship do
     it { should_not be_optional }
 
     specify do
-      relation.ast.should == s(:association,
-                               s(:name, :RelationshipName),
-                               s(:type, :many),
-                               s(:optional?, false))
+      expect(relation.ast).to eq s(:association,
+                                   s(:name, :RelationshipName),
+                                   s(:type, :many),
+                                   s(:optional?, false))
     end
   end
 
@@ -44,10 +44,10 @@ describe Katuv::Core::Relationship do
     it { should be_optional }
 
     specify do
-      relation.ast.should == s(:association,
-                               s(:name, :RelationshipName),
-                               s(:type, :many),
-                               s(:optional?, true))
+      expect(relation.ast).to eq s(:association,
+                                   s(:name, :RelationshipName),
+                                   s(:type, :many),
+                                   s(:optional?, true))
     end
   end
 
@@ -59,10 +59,10 @@ describe Katuv::Core::Relationship do
     it { should_not be_optional }
 
     specify do
-      relation.ast.should == s(:association,
-                               s(:name, :RelationshipName),
-                               s(:type, :single),
-                               s(:optional?, false))
+      expect(relation.ast).to eq s(:association,
+                                   s(:name, :RelationshipName),
+                                   s(:type, :single),
+                                   s(:optional?, false))
     end
   end
 
@@ -74,15 +74,15 @@ describe Katuv::Core::Relationship do
     it { should be_optional }
 
     specify do
-      relation.ast.should == s(:association,
-                               s(:name, :RelationshipName),
-                               s(:type, :single),
-                               s(:optional?, true))
+      expect(relation.ast).to eq s(:association,
+                                   s(:name, :RelationshipName),
+                                   s(:type, :single),
+                                   s(:optional?, true))
     end
   end
 end
 
-describe Katuv::Core::OptionalRelationship do
+RSpec.describe Katuv::Core::OptionalRelationship do
   subject { Katuv::Core::OptionalRelationship.new(nil, nil) }
   its(:optional?) { should be true }
 end

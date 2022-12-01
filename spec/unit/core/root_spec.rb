@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Node, Katuv::Core::Root do
+RSpec.describe Katuv::Core::Node, Katuv::Core::Root do
   it_behaves_like 'a relatable node called', :root do
     let(:klass) { Katuv::Core::Root }
   end

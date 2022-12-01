@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Katuv do
+RSpec.describe Katuv do
 
   # returns a list of class definitions, represented as a hash/maybe a AST, a
   # la:

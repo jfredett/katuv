@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Nodes do
+RSpec.describe Katuv::Core::Nodes do
   subject(:nodes) { Katuv::Core::Nodes.new }
 
   describe 'api' do
@@ -18,7 +18,7 @@ describe Katuv::Core::Nodes do
     end
 
     it { should include example_node }
-    it { should have(1).element }
+    its(:length) { should == 1 }
   end
 
   describe '#each' do
@@ -27,7 +27,7 @@ describe Katuv::Core::Nodes do
     before { nodes << example_node }
 
     it "delegates as expected" do
-      example_node.should_receive(:foo)
+      allow(example_node).to receive(:foo)
       nodes.each do |node|
         node.foo
       end
@@ -111,7 +111,7 @@ describe Katuv::Core::Nodes do
       end
 
       describe 'the node' do
-        it { should have(4).elements }
+        its(:length) { should == 4 }
       end
     end
   end

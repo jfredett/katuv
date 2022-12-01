@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Relationships do
+RSpec.describe Katuv::Core::Relationships do
   subject(:relationships) { Katuv::Core::Relationships.new }
 
   describe 'api' do
@@ -18,7 +18,7 @@ describe Katuv::Core::Relationships do
     end
 
     it { should include example_relationship }
-    it { should have(1).element }
+    its(:length) { should eq 1 }
     its(:last) { should == example_relationship }
   end
 
@@ -28,7 +28,7 @@ describe Katuv::Core::Relationships do
     before { relationships << example_relationship }
 
     it "delegates as expected" do
-      example_relationship.should_receive(:foo)
+      allow(example_relationship).to receive(:foo)
       relationships.each do |relationship|
         relationship.foo
       end

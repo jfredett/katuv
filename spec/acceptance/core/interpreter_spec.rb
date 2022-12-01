@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Katuv do
+RSpec.describe Katuv do
   subject(:the_example_dsl) do
     Katuv.dsl :ExampleDSL do
       terminal :Foo

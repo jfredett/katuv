@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv::Core::Definition do
+RSpec.describe Katuv::Core::Definition do
   let(:block) { proc { shibboleth } }
   subject(:definition) { Katuv::Core::Definition.new(:SomeNamespace) }
 
@@ -44,7 +44,7 @@ describe Katuv::Core::Definition do
 
     subject { definition }
 
-    it { should have(3).nodes }
+    its("nodes.length") { should == 3 }
 
     it 'has the nodes which were added to the definition' do
       definition.nodes.map(&:name) =~ [:term1, :term2, :root ]
@@ -62,14 +62,17 @@ describe Katuv::Core::Definition do
   end
 
   describe '#evaluate!' do
-    before do
+    
+    specify "calls the methods in the block" do
       definition.stub(:shibboleth)
       definition.evaluate!(&block)
+      definition.should have_received :shibboleth
     end
 
-    it { should have_received :shibboleth }
+    specify "fails without a supplied block" do
+      expect { definition.evaluate! }.to raise_error ArgumentError, "must supply block"
+    end
 
-    specify { expect { definition.evaluate! }.to raise_error ArgumentError, "must supply block" }
   end
 
   describe '#terminal' do

@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Katuv, 'the dsl-dsl' do
+RSpec.describe Katuv, 'the dsl-dsl' do
   subject(:the_example_dsl) do
     Katuv.dsl :ExampleDSL do
       terminal :Foo
