@@ -1,4 +1,4 @@
-# Katuv [![Gem Version](https://badge.fury.io/rb/katuv.png)](http://badge.fury.io/rb/katuv) [![Build Status](https://travis-ci.org/jfredett/katuv.png?branch=master)](http://travis-ci.org/jfredett/katuv) [![Code Climate](https://codeclimate.com/github/jfredett/katuv.png)](https://codeclimate.com/github/jfredett/katuv) [![Coverage Status](https://coveralls.io/repos/jfredett/katuv/badge.png?branch=master)](https://coveralls.io/r/jfredett/katuv)
+# Katuv [![Gem Version](https://badge.fury.io/rb/katuv.png)](http://badge.fury.io/rb/katuv) [![Code Climate](https://codeclimate.com/github/jfredett/katuv.png)](https://codeclimate.com/github/jfredett/katuv) [![Coverage Status](https://coveralls.io/repos/jfredett/katuv/badge.png?branch=master)](https://coveralls.io/r/jfredett/katuv)
 
 Katuv is a tool for defining and transforming Embedded Ruby DSLs (EDSLs). It
 provides a simple facility to define DSL components and their connections.
