@@ -5,6 +5,7 @@ require 'katuv/version'
 require 'ast'
 require 'delegate'
 
+require 'katuv/utility'
 require 'katuv/core'
 
 module Katuv
