@@ -38,34 +38,46 @@ describe Katuv::DSL::Context do
     context 'when given a single, bare element' do
       before { example_class.add_validations(validation_1) }
 
-      its(:validations) { should have(1).element }
-      its(:validations) { should =~ [validation_1] }
+      context :validations do
+        subject { example_class.validations }
+
+        its(:size) { is_expected.to be 1 }
+        it { should =~ [validation_1] }
+      end
     end
 
     context 'when given a list of one element' do
       before { example_class.add_validations([validation_1]) }
 
-      its(:validations) { should have(1).element }
-      its(:validations) { should =~ [validation_1] }
+      context :validations do
+        subject { example_class.validations }
+
+        its(:size) { is_expected.to be 1 }
+        it { should =~ [validation_1] }
+      end
     end
 
     context 'when given a list of several elements' do
       before { example_class.add_validations([validation_1, validation_2]) }
 
-      its(:validations) { should have(2).elements }
-      its(:validations) { should =~ [validation_1, validation_2] }
+      context :validations do
+        subject { example_class.validations }
+
+        its(:size) { is_expected.to be 2 }
+        it { should =~ [validation_1, validation_2] }
+      end
     end
 
     context 'adding more validations after the fact' do
       before { example_class.add_validations(validation_1) }
 
       it 'adds the new validations to the list, preserving the old ones' do
-        example_class.validations.should have(1).element
+        example_class.validations.size.should be 1
         example_class.validations.should =~ [validation_1]
 
         example_class.add_validations validation_2
 
-        example_class.validations.should have(2).elements
+        example_class.validations.size.should be 2
         example_class.validations.should =~ [validation_1, validation_2]
       end
     end

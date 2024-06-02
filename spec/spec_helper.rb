@@ -10,7 +10,6 @@ Dir['./spec/shared/*_examples.rb'].each { |file| require file }
 
 Coveralls.wear! if ENV['COVERALLS']
 
-
 require 'katuv'
 
 RSpec.configure do |config|

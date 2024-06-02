@@ -15,5 +15,5 @@ describe Katuv::Core::Interpreter::Association do
 
   its(:name) { should == :Baz }
   its(:type) { should == :single }
-  its(:optional?) { should be_true }
+  its(:optional?) { should be true }
 end

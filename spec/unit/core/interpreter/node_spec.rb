@@ -21,13 +21,13 @@ describe Katuv::Core::Interpreter::Node do
     context 'when there is an association with the given name' do
       subject { interpreter.find_associations_by_name(:example) }
 
-      it { should have(1).element }
+      its(:size) { is_expected.to be 1 }
     end
 
     context 'when there is not an association with the given name' do
       subject { interpreter.find_associations_by_name(:unexample) }
 
-      it { should have(0).elements }
+      its(:size) { is_expected.to be 0 }
     end
   end
 

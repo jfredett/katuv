@@ -13,7 +13,7 @@ describe Katuv::DSL::Validator::Factory do
         fake_assoc.stub(:type).and_return(:multiple)
       end
 
-      it { should have(1).element }
+      its(:size) { is_expected.to be 1 }
       its(:first) { should be_a Katuv::DSL::Validator::RequiredAssociation }
     end
 
@@ -23,7 +23,7 @@ describe Katuv::DSL::Validator::Factory do
         fake_assoc.stub(:type).and_return(:single)
       end
 
-      it { should have(1).element }
+      its(:size) { is_expected.to be 1 }
       its(:first) { should be_a Katuv::DSL::Validator::UniqueAssociation }
     end
 
@@ -33,7 +33,7 @@ describe Katuv::DSL::Validator::Factory do
         fake_assoc.stub(:type).and_return(:single)
       end
 
-      it { should have(2).elements }
+      its(:size) { is_expected.to be 2 }
 
       describe 'the first element' do
         subject { factory[0] }

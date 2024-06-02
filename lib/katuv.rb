@@ -10,6 +10,8 @@ require 'anima'
 require 'katuv/utility'
 require 'katuv/core'
 
+require 'katuv/dsl'
+
 module Katuv
   def self.dsl(namespace, &block)
     raise Core::NoDefinitionBlock unless block_given?

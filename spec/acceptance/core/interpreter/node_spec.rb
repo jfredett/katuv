@@ -18,7 +18,7 @@ describe Katuv::Core::Interpreter::Node do
 
     its(:type) { should == :root }
     its(:name) { should == :dsl }
-    it { should have(1).associations }
+    its(:"associations.size") { is_expected.to eq 1 }
 
     describe 'the association' do
       subject { interpreter.associations.first }
@@ -57,7 +57,7 @@ describe Katuv::Core::Interpreter::Node do
 
     its(:type) { should == :nonterminal }
     its(:name) { should == :Baz }
-    it { should have(2).associations }
+    its(:"associations.size") { is_expected.to eq 2 }
 
     describe 'the associations' do
       context 'the first association' do
